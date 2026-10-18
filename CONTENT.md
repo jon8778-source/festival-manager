@@ -52,9 +52,9 @@ Costs are a share of full-scale ticket revenue (R). Satisfaction and reputation 
 
 | Event | Festival | When | Option | What the player does | Cost (share of R) | Customers | Bands | Reputation |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Food stall queue | 1 | Scripted, midday | A | Add an emergency food stall (1.5 times the usual price, about £450) | 3.6% | 0 | 0 | 0 |
+| Food stall queue | 1 | Scripted, midday | A | Call in a pop-up food van (about £250) | 2% | 0 | 0 | 0 |
 |   |   |   | B | Open a free water and snacks point (about £60) | 0.5% | -2 | 0 | 0 |
-|   |   |   | C | Do nothing | 0 | -5 | 0 | 0 |
+|   |   |   | C | Do nothing | 0 | -8 | 0 | 0 |
 | Band running late | 1 | Scripted, early afternoon | A | Stretch the opener's set (overtime, about £60) | 0.5% | 0 | 0 | 0 |
 |   |   |   | B | Play music over the speakers | 0 | -3 | 0 | 0 |
 |   |   |   | C | Cut the late band's set short | 0 | -1 | -5 | 0 |
@@ -62,13 +62,13 @@ Costs are a share of full-scale ticket revenue (R). Satisfaction and reputation 
 |   |   |   | B | Ignore it: 25% chance of a fine of 5% of R (about £625 at festival 1) | 0 or 5% | 0 | 0 | 0 |
 | Stage equipment breaks | 2 | Scripted, mid-afternoon | A | Hire a replacement (about £1,350) | 3% | 0 | 0 | 0 |
 |   |   |   | B | Borrow kit from another band | 0 | 0 | -4 | 0 |
-|   |   |   | C | Play on without it | 0 | -4 | -4 | 0 |
+|   |   |   | C | Play on without it | 0 | -6 | -4 | 0 |
 | Merch selling fast | 2 and 3 | Scripted at festival 2 (evening); random at festival 3 (50%) | A | Rush-order more stock (most of it sells) | -0.1% (net gain) | 0 | 0 | 0 |
 |   |   |   | B | Raise the price by £5 | -0.4% (net gain) | -2 | 0 | 0 |
 |   |   |   | C | Let it sell out | 0 | -1 | 0 | 0 |
 | Light rain | 2 | Random, afternoon (50%) | A | Hand out free ponchos (about £340) | 0.75% | -1 | 0 | 0 |
 |   |   |   | B | Open a covered area (about £450) | 1% | 0 | 0 | 0 |
-|   |   |   | C | Do nothing (bar sales dip, about £225) | 0.5% | -4 | 0 | 0 |
+|   |   |   | C | Do nothing (bar sales dip, about £225) | 0.5% | -6 | 0 | 0 |
 | Headliner delayed | 2 and 3 | Random (30%) | A | Extend the opener (overtime, about £340 at festival 2, £900 at festival 3) | 0.75% | 0 | 0 | 0 |
 |   |   |   | B | Wait it out | 0 | -3 | 0 | 0 |
 |   |   |   | C | Put the support act on early | 0 | -1 | -3 | 0 |
@@ -125,14 +125,14 @@ Randy is a retired promoter: an old British voice, dry, fond and a little weary,
 | 2. Lineup | Lineup screen opens | "Three slots: opener, support and headliner. Start at the top. It's the headliner that sells the tickets." |
 | 2. Lineup | First negotiation opens | "This is {band_name}. Acts like this usually go for £{rate_low} to £{rate_high}. Make them an offer and see what comes back." |
 | 2. Lineup | Offer table | "You've three things to play with: the fee, where they sit on the bill, and their cut of the merch." |
-| 2. Lineup | Band counters | "A counter. That's a good sign: they want the gig. Meet them part way, or offer a bigger merch cut instead of cash." |
+| 2. Lineup | Band counters | "A counter. That's a good sign: they want the gig. Meet them part way, or check you've matched their merch ask." |
 | 2. Lineup | Deal accepted | "Signed. Remember what you paid. A happy band plays a better set." |
 | 2. Lineup | Band walks away | "Ah, they've walked. No harm done. Try another act." |
 | 2. Lineup | Headliner booked | "Now the opener and support. Cheaper acts, and one of them might be the next big thing." |
 | 3. Build | Site map opens | "Now the field. Stage first, then toilets and food. 500 people need somewhere to go and something to eat, in that order." |
 | 3. Build | Ticket price | "A fair price is £{fair_price}. Go above it and fewer come; go below it and the profit gets thin." |
 | 4. Run | Gates open | "Gates are open. Keep an eye on the bars at the top: the crowd, the bands and your three targets." |
-| 4. Run | Food queue (scripted, midday) | "There's a queue at the food stall. Tap it and add another stall before tempers fray." |
+| 4. Run | Food queue (scripted, midday) | "There's a queue at the food stall. Get a food van in before tempers fray." |
 | 4. Run | Queue fixed | "Good. Problems only get bigger the longer you leave them." |
 | 4. Run | Band running late (scripted) | "Your support act is stuck on the A-road. Stretch the opener's set, or fill the gap with music over the speakers." |
 | 4. Run | Noise complaint | "Someone's complained about the noise. Turn it down and the crowd grumbles; ignore it and you might get fined." |

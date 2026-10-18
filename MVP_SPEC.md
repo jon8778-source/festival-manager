@@ -79,7 +79,7 @@ Constants live in one tuning config file (src/data/tuning.json) with these defau
 **Satisfaction**
 - Fair-price factor = clamp(1 - 2 x max(0, price / perceived value - 1), 0, 1)
 - Customer satisfaction = clamp(0.35 x queue ratio + 0.30 x L + 0.08 x fair-price factor + 0.15 x reputation - 0.06 + event customer changes, 0, 1)
-- Fee generosity per band = clamp((fee paid / fee ask - 0.8) / 0.4, 0, 1); use the fee-weighted average across booked bands
+- Fee generosity per band = clamp((fee paid / required fee - 0.8) / 0.4, 0, 1), where the required fee is the one from section 5 after the bill position and merch adjustments, so a deal accepted at a score of exactly 1.0 gives 0.5; use the fee-weighted average across booked bands
 - Band satisfaction = clamp(0.25 + 0.40 x fee generosity + 0.20 x min(1, phi / 0.8) + 0.10 x attendance + event band changes, 0, 1)
 
 **Stars**
@@ -98,7 +98,7 @@ Constants live in one tuning config file (src/data/tuning.json) with these defau
 - **Gate:** a band refuses outright if festival reputation is below its tier minimum (tier 1: 0, tier 2: 15, tier 3: 30, tier 4: 50, tier 5: 75): "Not at this festival yet."
 - **Required fee** = ask x (1 + (band reputation - festival reputation) / 200), clamped to 0.8 to 1.4 times the ask. Reputations here are 0 to 100.
 - **Bill position:** one slot below what the band expects needs 10% more; one slot higher allows 5% less.
-- **Merch split:** each 5 points below the band's merch ask needs 4% more on the fee; each 5 points above allows 4% less.
+- **Merch split:** each 5 points below the band's merch ask needs 4% more on the fee. Offering more than the band's merch ask does not lower the fee (the bands' merch share is not taken out of income in the MVP, so a discount would be free money).
 - **Score** = offered fee / required fee after adjustments. 1.0 or more: accept. 0.8 to 1.0: counter (the band moves the one term with the biggest gap just enough to reach 1.0 and says why). Below 0.8: reject.
 - **Patience:** 3 rounds. An offer scoring below 0.9 costs a round and lowers the band's mood. When patience runs out, talks with that band close for this festival only; every other band stays open.
 - **Mood carries into the festival** through fee generosity in band satisfaction.
@@ -156,7 +156,7 @@ Constants live in one tuning config file (src/data/tuning.json) with these defau
 
 ## 12. Test vectors (festival 1, no events)
 
-Use these to check the economy code. Inputs: capacity 500, fair price £25 (so Pt = £25 and R = £12,500), reputation 0.5, price £25, booked fee asks totalling £6,900 (so L is about 0.75), fees paid equal to the asks (fee generosity 0.5), 4.69 units each of toilets and food (capacity served 469, so phi = 0.75).
+Use these to check the economy code. Inputs: capacity 500, fair price £25 (so Pt = £25 and R = £12,500), reputation 0.5, price £25, booked fee asks totalling £6,900 (so L is about 0.75), fees paid equal to the required fees (fee generosity 0.5), 4.69 units each of toilets and food (capacity served 469, so phi = 0.75).
 - Perceived value = £26.25; price effect = about 1.052
 - Attendance = about 84% (about 421 people)
 - Customer satisfaction = about 67%; band satisfaction = about 72%
