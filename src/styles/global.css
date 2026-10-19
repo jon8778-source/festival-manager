@@ -1,0 +1,22 @@
+:root {
+  --colour-bg: #1d3557;
+  --colour-text: #f1faee;
+  --colour-accent: #ffb703;
+  --space: 16px;
+  --touch-target: 44px;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: var(--colour-text);
+  background: var(--colour-bg);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 360px;
+  background: var(--colour-bg);
+}
