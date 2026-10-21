@@ -72,6 +72,10 @@ export interface GameEvent {
   kind: 'prep' | 'day';
   festivals: number[];
   title: string;
+  /** Who raises it, for festival-day cards (the venue, a resident). */
+  from?: string;
+  /** What the festival-day card says. */
+  body?: string;
   options: DecisionOption[];
 }
 
@@ -122,6 +126,14 @@ export interface TimelineStop {
   emails: { id: string; bandId?: string }[];
 }
 
+export interface ScheduledDayEvent {
+  eventId: string;
+  /** Clock time on the day, "13:00". */
+  at: string;
+  /** Extra check when the time comes: "foodShort" fires only if food can't cover the lunchtime peak. */
+  onlyIf?: string;
+}
+
 export interface FestivalTimeline {
   prepDays: number;
   onSaleDay: number;
@@ -130,6 +142,8 @@ export interface FestivalTimeline {
   /** The lineup locks when days to gates reach this. */
   lineupLock: number;
   stops: TimelineStop[];
+  /** The festival day: scripted events in time order, and when the support and headliner go on. */
+  day: { events: ScheduledDayEvent[]; supportOn: string; headlinerOn: string };
 }
 
 export interface SalesWindow {

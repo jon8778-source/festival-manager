@@ -91,6 +91,14 @@ export interface Tuning {
     feeStep: number;
   };
   bandMood: { delighted: number; happy: number; grumbling: number };
+  festivalDay: {
+    /** Gates open at this hour; the day ends at endHour (24 is midnight). */
+    startHour: number;
+    endHour: number;
+    /** Real seconds for the whole day at normal speed. */
+    realSecondsAtNormalSpeed: number;
+    fastSpeed: number;
+  };
 }
 
 export const defaultTuning: Tuning = tuningJson;

@@ -1,6 +1,7 @@
 import type { GameEvent } from '../core/content';
 import type { OptionKey } from '../core/events';
-import { formatPounds } from '../core/format';
+import { formatPercent, formatPounds } from '../core/format';
+import { defaultTuning } from '../core/tuning';
 import styles from './ui.module.css';
 
 interface Props {
@@ -18,6 +19,10 @@ function effects(option: GameEvent['options'][number], r: number): string {
   if (option.customers) parts.push(`crowd ${option.customers > 0 ? '+' : ''}${option.customers}`);
   if (option.bands) parts.push(`bands ${option.bands > 0 ? '+' : ''}${option.bands}`);
   if (option.reputation) parts.push(`reputation ${option.reputation > 0 ? '+' : ''}${option.reputation}`);
+  if (option.risksFine) {
+    const e = defaultTuning.economy;
+    parts.push(`${formatPercent(e.noiseFineChance)} chance of a ${formatPounds(e.noiseFineShare * r)} fine`);
+  }
   return `${parts.join(', ')}. ${option.effect}`;
 }
 

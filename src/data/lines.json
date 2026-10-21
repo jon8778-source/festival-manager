@@ -1,19 +1,137 @@
 {
   "skip": "Want to skip the chat? Go on, I won't be offended.",
   "tutorial": [
-    { "id": "welcome", "step": "Welcome", "trigger": "gameStart", "text": "Randy Popping. Forty years of muddy fields and missing headliners. Let's get you through your first festival without either." },
-    { "id": "budget", "step": "Welcome", "trigger": "financesOpened", "text": "You've got £{cash} to play with. Bands, toilets, food and the field all come out of that, so don't blow it on the headliner." },
-    { "id": "targets", "step": "Welcome", "trigger": "hubOpened", "text": "Three stars to chase: make a profit, keep the crowd happy, keep the bands happy. Get two and you're through to next year." },
-    { "id": "forecast", "step": "Build", "trigger": "hubOpened", "text": "This is your forecast. Change anything and it updates. It's a guess, not a promise, but it's a good guess." },
-    { "id": "lineup", "step": "Lineup", "trigger": "lineupOpened", "text": "Three slots: opener, support and headliner. Start at the top. It's the headliner that sells the tickets." },
-    { "id": "firstNegotiation", "step": "Lineup", "trigger": "negotiationOpened", "text": "This is {band_name}. Acts like this usually go for £{rate_low} to £{rate_high}. Make them an offer and see what comes back." },
-    { "id": "offerTable", "step": "Lineup", "trigger": "negotiationOpened", "text": "You've three things to play with: the fee, where they sit on the bill, and their cut of the merch." },
-    { "id": "counter", "step": "Lineup", "trigger": "bandCountered", "text": "A counter. That's a good sign: they want the gig. Meet them part way, or offer a bigger merch cut. Just remember their cut comes out of what you sell." },
-    { "id": "dealAccepted", "step": "Lineup", "trigger": "dealSigned", "text": "Signed. Remember what you paid. A happy band plays a better set." },
-    { "id": "walkedAway", "step": "Lineup", "trigger": "bandWalked", "text": "Ah, they've walked. No harm done. Try another act." },
-    { "id": "headlinerBooked", "step": "Lineup", "trigger": "headlinerSigned", "text": "Now the opener and support. Cheaper acts, and one of them might be the next big thing." },
-    { "id": "site", "step": "Build", "trigger": "siteOpened", "text": "Now the field. Stage first, then toilets and food. {capacity} people need somewhere to go and something to eat, in that order." },
-    { "id": "soundLimiter", "step": "Build", "trigger": "soundLimiterOpened", "text": "A limiter's cheap insurance. Village folk complain about noise; they always have." },
-    { "id": "ticketPrice", "step": "Build", "trigger": "ticketsOpened", "text": "A fair price is £{fair_price}. Go above it and fewer come; go below it and the profit gets thin." }
+    {
+      "id": "welcome",
+      "step": "Welcome",
+      "trigger": "gameStart",
+      "text": "Randy Popping. Forty years of muddy fields and missing headliners. Let's get you through your first festival without either."
+    },
+    {
+      "id": "budget",
+      "step": "Welcome",
+      "trigger": "financesOpened",
+      "text": "You've got £{cash} to play with. Bands, toilets, food and the field all come out of that, so don't blow it on the headliner."
+    },
+    {
+      "id": "targets",
+      "step": "Welcome",
+      "trigger": "hubOpened",
+      "text": "Three stars to chase: make a profit, keep the crowd happy, keep the bands happy. Get two and you're through to next year."
+    },
+    {
+      "id": "forecast",
+      "step": "Build",
+      "trigger": "hubOpened",
+      "text": "This is your forecast. Change anything and it updates. It's a guess, not a promise, but it's a good guess."
+    },
+    {
+      "id": "lineup",
+      "step": "Lineup",
+      "trigger": "lineupOpened",
+      "text": "Three slots: opener, support and headliner. Start at the top. It's the headliner that sells the tickets."
+    },
+    {
+      "id": "firstNegotiation",
+      "step": "Lineup",
+      "trigger": "negotiationOpened",
+      "text": "This is {band_name}. Acts like this usually go for £{rate_low} to £{rate_high}. Make them an offer and see what comes back."
+    },
+    {
+      "id": "offerTable",
+      "step": "Lineup",
+      "trigger": "negotiationOpened",
+      "text": "You've three things to play with: the fee, where they sit on the bill, and their cut of the merch."
+    },
+    {
+      "id": "counter",
+      "step": "Lineup",
+      "trigger": "bandCountered",
+      "text": "A counter. That's a good sign: they want the gig. Meet them part way, or offer a bigger merch cut. Just remember their cut comes out of what you sell."
+    },
+    {
+      "id": "dealAccepted",
+      "step": "Lineup",
+      "trigger": "dealSigned",
+      "text": "Signed. Remember what you paid. A happy band plays a better set."
+    },
+    {
+      "id": "walkedAway",
+      "step": "Lineup",
+      "trigger": "bandWalked",
+      "text": "Ah, they've walked. No harm done. Try another act."
+    },
+    {
+      "id": "headlinerBooked",
+      "step": "Lineup",
+      "trigger": "headlinerSigned",
+      "text": "Now the opener and support. Cheaper acts, and one of them might be the next big thing."
+    },
+    {
+      "id": "site",
+      "step": "Build",
+      "trigger": "siteOpened",
+      "text": "Now the field. Stage first, then toilets and food. {capacity} people need somewhere to go and something to eat, in that order."
+    },
+    {
+      "id": "soundLimiter",
+      "step": "Build",
+      "trigger": "soundLimiterOpened",
+      "text": "A limiter's cheap insurance. Village folk complain about noise; they always have."
+    },
+    {
+      "id": "ticketPrice",
+      "step": "Build",
+      "trigger": "ticketsOpened",
+      "text": "A fair price is £{fair_price}. Go above it and fewer come; go below it and the profit gets thin."
+    },
+    {
+      "id": "gatesOpen",
+      "step": "Run",
+      "trigger": "gatesOpened",
+      "text": "Gates are open. Keep an eye on the bars at the top: the crowd, the bands and your three targets."
+    },
+    {
+      "id": "foodQueue",
+      "step": "Run",
+      "trigger": "event:food-queue",
+      "text": "There's a queue at the food stall. Get a food van in before tempers fray."
+    },
+    {
+      "id": "queueFixed",
+      "step": "Run",
+      "trigger": "fixed:food-queue",
+      "text": "Good. Problems only get bigger the longer you leave them."
+    },
+    {
+      "id": "noQueue",
+      "step": "Run",
+      "trigger": "prevented:food-queue",
+      "text": "No queue at the food stalls. That's what planning buys you."
+    },
+    {
+      "id": "bandLate",
+      "step": "Run",
+      "trigger": "event:band-late",
+      "text": "Your support act is stuck on the A-road. Stretch the opener's set, or fill the gap with music over the speakers."
+    },
+    {
+      "id": "complaintPrevented",
+      "step": "Run",
+      "trigger": "prevented:noise-complaint",
+      "text": "Not a peep from the village. That limiter's earned its keep."
+    },
+    {
+      "id": "noiseComplaint",
+      "step": "Run",
+      "trigger": "event:noise-complaint",
+      "text": "Someone's complained about the noise. Turn it down and the crowd grumbles; ignore it and you might get fined."
+    },
+    {
+      "id": "headlinerOn",
+      "step": "Run",
+      "trigger": "headlinerOn",
+      "text": "That's your headliner on. This is the bit everyone remembers."
+    }
   ]
 }
