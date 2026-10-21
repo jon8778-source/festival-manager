@@ -1,5 +1,5 @@
 // The game state and the reducer that changes it. Every player input is an action; the state
-// is plain JSON so it can be saved, replayed and logged. This step covers the preparation phase.
+// is plain JSON so it can be saved, replayed and logged. It covers preparation and the festival day.
 
 import {
   facilityDeadlinePassed,
@@ -32,6 +32,7 @@ import {
   type FestivalOutcome,
 } from './economy';
 import { combineEffects, resolveOption, type OptionEffect, type OptionKey } from './events';
+import { advanceClock, newDay, recordChoice, type DayState, type ScheduledEvent } from './festivalDay';
 import { fillTemplate, formatNumber, type TemplateVars } from './format';
 import { clamp, sum } from './math';
 import {
@@ -117,7 +118,8 @@ export interface GameState {
   rng: RngState;
   festivalId: string;
   attempt: number;
-  phase: 'prep' | 'day';
+  /** 'results' once the festival day ends at midnight. */
+  phase: 'prep' | 'day' | 'results';
   /** Festival reputation, 0 to 100. */
   reputation: number;
   daysToGates: number;
@@ -140,6 +142,8 @@ export interface GameState {
   notice: string | null;
   /** Forecast stored when the gates open, for the results screen. */
   forecastAtGates: FestivalOutcome | null;
+  /** The festival day, from the gates opening. */
+  day: DayState | null;
 }
 
 export type GameAction =
@@ -155,7 +159,11 @@ export type GameAction =
   | { type: 'dismissEmail'; emailId: string }
   | { type: 'chooseDecision'; emailId: string; option: OptionKey }
   | { type: 'dismissLine' }
-  | { type: 'skipTutorial' };
+  | { type: 'skipTutorial' }
+  | { type: 'openGates' }
+  | { type: 'tick'; realSeconds: number }
+  | { type: 'setSpeed'; speed: number }
+  | { type: 'chooseOption'; option: OptionKey };
 
 // ---------------------------------------------------------------- derived values
 
@@ -254,6 +262,20 @@ export function bookedBands(state: GameState, c: Content = defaultContent, t: Tu
 
 /** The live "Forecast before events": the current plan through the core formulas. */
 export function forecastOf(state: GameState, c: Content = defaultContent, t: Tuning = defaultTuning): FestivalOutcome {
+  return outcomeWith(state, state.decisions.map((d) => d.effect), c, t);
+}
+
+/** The festival as it stands on the day: the plan plus every festival-day choice so far. */
+export function liveOutcome(state: GameState, c: Content = defaultContent, t: Tuning = defaultTuning): FestivalOutcome {
+  const dayEffects = state.day?.choices.map((ch) => ch.effect) ?? [];
+  return outcomeWith(state, [...state.decisions.map((d) => d.effect), ...dayEffects], c, t);
+}
+
+export function liveStars(state: GameState, c: Content = defaultContent, t: Tuning = defaultTuning): Stars {
+  return computeStars(liveOutcome(state, c, t), festivalOf(state, c).targets);
+}
+
+function outcomeWith(state: GameState, effects: OptionEffect[], c: Content, t: Tuning): FestivalOutcome {
   const f = festivalOf(state, c);
   return evaluateFestival(
     {
@@ -266,7 +288,7 @@ export function forecastOf(state: GameState, c: Content = defaultContent, t: Tun
       facilityUnits: facilityUnits(state, c),
       foodUnits: unitsOf(state, 'food'),
       facilitiesCost: spendSoFar(state, c, t).facilities,
-      events: combineEffects(state.decisions.map((d) => d.effect)),
+      events: combineEffects(effects),
     },
     t,
   );
@@ -335,6 +357,7 @@ export function newGame(seed: number, c: Content = defaultContent, t: Tuning = d
     tutorial: newTutorial(),
     notice: null,
     forecastAtGates: null,
+    day: null,
   };
   state = cue(state, c, 'gameStart');
   return sendStopEmails(state, c, t);
@@ -534,7 +557,7 @@ function advanceDay(state: GameState, c: Content, t: Tuning): GameState {
   s = { ...s, ticketsSold: ticketsSoldByDay(s.daysToGates, fc.attendees, s.ticketsSold, timeline, c.timeline) };
   s = sendStopEmails(s, c, t);
   s = sendConditionEmails(s, c, t);
-  if (s.daysToGates === 0) s = { ...s, phase: 'day', forecastAtGates: forecastOf(s, c, t) };
+  if (s.daysToGates === 0) s = { ...s, phase: 'day', forecastAtGates: forecastOf(s, c, t), day: newDay(timeline, t) };
   return s;
 }
 
@@ -712,6 +735,57 @@ function readEmail(state: GameState, c: Content, emailId: string): GameState {
   return s;
 }
 
+// ---------------------------------------------------------------- festival day
+
+/** Does a scheduled event fire, or did preparation prevent it? */
+function eventFires(state: GameState, c: Content, t: Tuning, event: ScheduledEvent): boolean {
+  const prevented = new Set(state.decisions.flatMap((d) => d.effect.prevents));
+  if (prevented.has(event.eventId)) return false;
+  switch (event.onlyIf) {
+    case undefined:
+      return true;
+    case 'foodShort':
+      return liveOutcome(state, c, t).foodQueueRisk;
+    default:
+      throw new Error(`Unknown event condition: ${event.onlyIf}`);
+  }
+}
+
+function openGates(state: GameState, c: Content): GameState {
+  if (state.phase !== 'day' || !state.day || state.day.started) return state;
+  return cue({ ...state, day: { ...state.day, started: true } }, c, 'gatesOpened');
+}
+
+function tick(state: GameState, c: Content, t: Tuning, realSeconds: number): GameState {
+  if (state.phase !== 'day' || !state.day) return state;
+  const { day, happenings } = advanceClock(state.day, realSeconds, (e) => eventFires(state, c, t, e), t);
+  let s: GameState = { ...state, day };
+  for (const h of happenings) {
+    if (h.kind === 'event') s = cue(s, c, `event:${h.eventId}`);
+    else if (h.kind === 'prevented') s = cue(s, c, `prevented:${h.eventId}`);
+    else if (h.kind === 'headlinerOn') s = cue(s, c, 'headlinerOn');
+    else s = { ...s, phase: 'results' };
+  }
+  return s;
+}
+
+function setSpeed(state: GameState, t: Tuning, speed: number): GameState {
+  if (!state.day || (speed !== 1 && speed !== t.festivalDay.fastSpeed)) return state;
+  return { ...state, day: { ...state.day, speed } };
+}
+
+function chooseOption(state: GameState, c: Content, t: Tuning, key: OptionKey): GameState {
+  const active = state.day?.active;
+  if (!state.day || !active) return state;
+  const option = getEvent(c, active.eventId).options.find((o) => o.key === key);
+  if (!option) return state;
+  const f = festivalOf(state, c);
+  const { effect, rng } = resolveOption(option, revenueAtScale(state, c, t), f.fairPrice, state.rng, t);
+  const s: GameState = { ...state, rng, day: recordChoice(state.day, key, effect) };
+  // Option A pays to fix the problem; Randy has a line for some of those.
+  return key === 'A' ? cue(s, c, `fixed:${active.eventId}`) : s;
+}
+
 // ---------------------------------------------------------------- reducer
 
 export function reduce(state: GameState, action: GameAction, c: Content = defaultContent, t: Tuning = defaultTuning): GameState {
@@ -743,6 +817,14 @@ export function reduce(state: GameState, action: GameAction, c: Content = defaul
       return { ...s, tutorial: dismissLine(s.tutorial) };
     case 'skipTutorial':
       return { ...s, tutorial: skipTutorial(s.tutorial) };
+    case 'openGates':
+      return openGates(s, c);
+    case 'tick':
+      return tick(s, c, t, action.realSeconds);
+    case 'setSpeed':
+      return setSpeed(s, t, action.speed);
+    case 'chooseOption':
+      return chooseOption(s, c, t, action.option);
   }
 }
 

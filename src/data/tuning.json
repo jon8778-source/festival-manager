@@ -119,5 +119,11 @@
     "ticketPriceMax": 50,
     "ticketPriceStep": 1,
     "feeStep": 10
+  },
+  "festivalDay": {
+    "startHour": 12,
+    "endHour": 24,
+    "realSecondsAtNormalSpeed": 300,
+    "fastSpeed": 2
   }
 }
