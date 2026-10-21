@@ -1,0 +1,15 @@
+.screen {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--space) + env(safe-area-inset-top)) calc(var(--space) + env(safe-area-inset-right))
+    calc(var(--space) + env(safe-area-inset-bottom)) calc(var(--space) + env(safe-area-inset-left));
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2rem, 10vw, 4rem);
+  color: var(--colour-accent);
+}

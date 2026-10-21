@@ -1,0 +1,93 @@
+{
+  "economy": {
+    "multiDayUplift": 0.5,
+    "spendPerHead": 0.45,
+    "merchSharePerHead": 0.17,
+    "lineupCostCoef": 0.85,
+    "lineupExponent": 0.6666666666666666,
+    "facilitiesCostCoef": 0.3,
+    "facilityOverbuild": 1.25,
+    "unitServes": 100,
+    "overheadShare": 0.35,
+    "emergencyMultiplier": 1.5,
+    "advanceTopUp": 1.1,
+    "advanceFee": 0.12,
+    "advanceFeeThreeStars": 0.06,
+    "foodQueuePeak": 1.2,
+    "foodIncomeExponent": 0.5,
+    "noiseFineShare": 0.05,
+    "noiseFineChance": 0.25
+  },
+  "attendance": {
+    "perceivedBase": 0.6,
+    "perceivedPerLineup": 0.6,
+    "priceSensitivity": 1.1,
+    "priceEffectFloor": 0.3,
+    "lineupBase": 0.2,
+    "lineupWeight": 0.8,
+    "reputationBase": 0.75,
+    "reputationWeight": 0.5
+  },
+  "satisfaction": {
+    "customerQueueWeight": 0.35,
+    "customerLineupWeight": 0.3,
+    "customerFairPriceWeight": 0.08,
+    "customerReputationWeight": 0.15,
+    "fairPriceSensitivity": 2,
+    "generosityFloor": 0.8,
+    "generosityRange": 0.4,
+    "bandBase": 0.25,
+    "bandGenerosityWeight": 0.4,
+    "bandFacilitiesWeight": 0.2,
+    "bandFacilitiesFull": 0.8,
+    "bandAttendanceWeight": 0.1
+  },
+  "reputation": {
+    "start": 50,
+    "carry": 0.7
+  },
+  "merchSlotWeights": {
+    "1": { "headliner": 0.5, "support": 0.3, "opener": 0.2 },
+    "2": { "headliner": 0.4, "support": 0.25, "support2": 0.25, "opener": 0.1 },
+    "3": {
+      "headliner": 0.35,
+      "support": 0.2,
+      "opener": 0.1,
+      "secondHeadliner": 0.15,
+      "secondSupport": 0.12,
+      "secondOpener": 0.08
+    }
+  },
+  "negotiation": {
+    "tierGate": [0, 15, 30, 50, 75],
+    "expectedSlotRankByTier": [0, 1, 2, 2, 2],
+    "repDivisor": 200,
+    "requiredFeeMin": 0.8,
+    "requiredFeeMax": 1.4,
+    "emergingDiscount": 0.1,
+    "slotBelowPremium": 0.1,
+    "slotAboveDiscount": 0.05,
+    "merchStep": 5,
+    "merchBelowPremium": 0.04,
+    "merchAboveDiscount": 0.02,
+    "merchMin": 0,
+    "merchMax": 30,
+    "acceptAt": 1,
+    "counterAt": 0.8,
+    "roundCostBelow": 0.9,
+    "patience": 3,
+    "moodStart": 70,
+    "moodDropPerBadRound": 15,
+    "hintSpread": 0.15,
+    "hintSpreadKnown": 0.08,
+    "verdictCloseAt": 0.9
+  },
+  "decisions": {
+    "slowSalesThreshold": 0.8
+  },
+  "bandMood": {
+    "delighted": 75,
+    "happy": 60,
+    "grumbling": 45
+  }
+}
