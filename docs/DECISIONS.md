@@ -82,3 +82,10 @@ The full list is in section 9 of [PLAN.md](PLAN.md). In short:
 59. **Downloads** (the log as .jsonl and the save export) use the device share sheet where the browser can share files, otherwise a normal download.
 60. **Reduced motion** is a switch in Settings (stored in `fm.settings`) as well as the system setting. It stops the festival scene animating.
 61. **Bug fixed:** an accepted offer's round was overwritten when the band was booked, so it was missing from the band's rounds and from the log.
+
+## Step 7: milestone 1 check (21 October 2026)
+
+62. **Milestone 1 against spec section 13.1:** everything in the criteria is built and was checked in a browser end to end. The playtest link was not published: every deploy on main failed at the Pages step with "404 Not Found… Ensure GitHub Pages has been enabled". The build itself passes. GitHub Pages has to be switched on in the repository settings (Source: GitHub Actions); that can't be done from code.
+63. **Step 6 was not on main:** PR #4 was merged before the results, save and log commits were pushed, so this step's PR carries them.
+64. **Fixes from the check:** Next festival was an active-looking button that did nothing after a pass (now plainly disabled); bands paid exactly their asking fee were listed as underpaid because of floating-point rounding; the "Crowd area" label on the site map had too little contrast (4.2:1, now above 4.5:1); the main menu's continue button now says what it does in each phase.
+65. **Layout audit:** every screen was checked at 360 × 740 and 820 × 1180 for sideways overflow, touch targets under 44 px and text contrast below WCAG AA. There's a short playtester checklist in `docs/PLAYTEST.md`.

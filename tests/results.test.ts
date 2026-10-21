@@ -19,6 +19,8 @@ describe('festival results', () => {
     expect(r.wentWell).toContain('avoided');
     expect(r.randy[0]).toBe(`Here's how you did: ${r.stars.count} stars out of three.`);
     expect(r.cashAfter).toBeCloseTo(20000 + r.outcome.profit);
+    // Every band was paid its asking fee, so pay isn't a cause.
+    expect(r.causes.join(' ')).not.toMatch(/paid below/);
   });
 
   it('the review is the same every time for the same game', () => {

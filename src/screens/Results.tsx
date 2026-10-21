@@ -148,10 +148,11 @@ export function Results() {
         </section>
 
         <div className={styles.buttons}>
-          <Button variant="primary" wide disabled={!r.passed} title="Festival 2 arrives in a later milestone">
+          {/* Festival 2 arrives in milestone 4, so this stays disabled for now. */}
+          <Button wide disabled>
             {r.passed ? 'Next festival: coming soon' : 'Next festival: needs 2 stars'}
           </Button>
-          <Button variant={r.passed ? 'secondary' : 'primary'} wide onClick={() => {
+          <Button variant="primary" wide onClick={() => {
             dispatch({ type: 'replay' });
             go({ name: 'hub' });
           }}>

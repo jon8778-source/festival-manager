@@ -116,8 +116,10 @@ function findCauses(state: GameState, outcome: FestivalOutcome, c: Content, t: T
   if (empty.length > 0) {
     causes.push({ text: `An empty ${empty.join(' and ')} slot on the bill.`, weight: s.customerLineupWeight * (1 - outcome.lineup) });
   }
-  if (outcome.generosity < 0.5 && Object.keys(state.lineup).length > 0) {
-    causes.push({ text: 'Bands paid below what they wanted.', weight: s.bandGenerosityWeight * (0.5 - outcome.generosity) });
+  // Paying exactly the required fee scores (1 - floor) / range (0.5); allow for floating-point error.
+  const fairGenerosity = (1 - s.generosityFloor) / s.generosityRange;
+  if (outcome.generosity < fairGenerosity - 1e-9 && Object.keys(state.lineup).length > 0) {
+    causes.push({ text: 'Bands paid below what they wanted.', weight: s.bandGenerosityWeight * (fairGenerosity - outcome.generosity) });
   }
   for (const ch of state.day?.choices ?? []) {
     const hit = -(ch.effect.customerDelta + ch.effect.bandDelta);
