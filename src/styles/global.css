@@ -65,6 +65,14 @@ button:disabled {
   outline-offset: 2px;
 }
 
+/* The system setting or the Settings screen's reduced-motion switch. */
+:root[data-motion='reduced'] *,
+:root[data-motion='reduced'] *::before,
+:root[data-motion='reduced'] *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

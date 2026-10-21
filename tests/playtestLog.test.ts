@@ -21,6 +21,16 @@ describe('playtest log', () => {
     expect(records[0]?.score).toBeCloseTo(0.867, 2);
   });
 
+  it('records an accepted offer too', () => {
+    const { next, records } = step(newGame(1), {
+      type: 'submitOffer',
+      bandId: 'the-mud-pies',
+      offer: { fee: 380, slot: 'opener', merchPct: 10 },
+    });
+    expect(next.talks['the-mud-pies']?.rounds.map((r) => r.result)).toEqual(['accept']);
+    expect(records[0]).toMatchObject({ kind: 'negotiation_round', band: 'the-mud-pies', result: 'accept' });
+  });
+
   it('records festival-day choices with the seconds taken, and the result at midnight', () => {
     let s = playToGates({ foodUnits: 1 });
     while (!s.day?.active) s = reduce(s, { type: 'tick', realSeconds: 1 });

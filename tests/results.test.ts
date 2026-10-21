@@ -14,6 +14,7 @@ describe('festival results', () => {
     expect(r.tip).toBeNull();
     expect(r.newspaper.paper).toBe('The Village Gazette');
     expect(r.newspaper.headline).not.toMatch(/\{/);
+    expect(r.newspaper.opening).toBeTruthy();
     expect(r.newspaper.successLine).toBe('Plenty of food stalls meant no one queued long for lunch.');
     expect(r.wentWell).toContain('avoided');
     expect(r.randy[0]).toBe(`Here's how you did: ${r.stars.count} stars out of three.`);
@@ -34,6 +35,7 @@ describe('festival results', () => {
     expect(r.causes.length).toBeLessThanOrEqual(3);
     expect(r.causes.join(' ')).toMatch(/Queues|overpriced/);
     expect(r.randy[1]).toMatch(/Not this time/);
+    expect(r.newspaper.opening === null).toBe(!r.stars[r.best]);
   });
 
   it('shows a noise fine in the event line', () => {

@@ -592,7 +592,9 @@ function book(state: GameState, c: Content, t: Tuning, bandId: string, offer: Of
     requiredFee: adjustedRequiredFee(profile, state.reputation, offer, t),
   };
   let s: GameState = { ...state, lineup: { ...state.lineup, [offer.slot]: booking } };
-  s = updateTalks(s, bandId, { ...talksFor(s, bandId, t), ...talks, counter: null });
+  // Take only the talks fields: `talks` may carry an older copy of the rounds.
+  const { status, patience, mood } = talks;
+  s = updateTalks(s, bandId, { ...talksFor(s, bandId, t), status, patience, mood, counter: null });
   s = markBandEmailsDone(s, bandId, 'counter');
   s = markBandEmailsDone(s, bandId, 'emergingContact');
   s = sendEmail(s, c, t, 'dealDone', { slot: offer.slot, fee: formatNumber(offer.fee), merch_pct: String(offer.merchPct) }, bandId);

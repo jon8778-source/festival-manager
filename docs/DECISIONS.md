@@ -66,3 +66,19 @@ The full list is in section 9 of [PLAN.md](PLAN.md). In short:
 46. **Randy's "Queue fixed" line** follows option A on the food queue. Option A on any event cues `fixed:<event>`; only the food queue has a line for it in festival 1.
 47. **The star meters** show the live outcome (the plan plus every choice so far) against the targets. Each bar is drawn relative to its target, with the target marker two-thirds of the way along, so the 5% profit target is as readable as the satisfaction targets.
 48. **At midnight** the phase moves to `results`, and a placeholder results screen shows the stars, the figures and each choice with its response time until the newspaper (step 6).
+
+## Step 6: results, save and playtest log (21 October 2026)
+
+49. **Results are derived, not stored.** `festivalResults(state)` works the result and the review out from the final state. The headline variant is picked with a generator seeded from the game seed and attempt, so a loaded save shows exactly the same review and nothing extra needs saving.
+50. **Cash after the festival** is the budget plus profit (festival 1 has no advance). A negative figure is shown as a shortfall.
+51. **The opening line** (best area) appears only when that area met its target. In a festival that misses every target, praise would contradict the stars. The closing line, event line and success line follow the spec.
+52. **"{weakest_issue} spoil the mood"** starts a sentence, so the template uses a capitalised version (`{weakest_issue_cap}`). With no headliner booked, headlines that name the headliner aren't picked.
+53. **Causes** are ranked by a rough size in satisfaction points: queues (0.35 × the unserved share), an overpriced ticket, empty slots, low pay, options that cost goodwill, a noise fine and a loss. The top three are shown. "Went well" names a prevented problem first, otherwise the best area.
+54. **The success line** picks, in order: sold out, no food queue, the sound limiter (option A only, since the line names the limiter), then a delighted headliner.
+55. **Randy's results lines and the tip** show on the results screen even when the tutorial was skipped, because the tip is part of the result.
+56. **Replay** starts the festival again from day 30 with a new seed taken from the old generator, attempt + 1, and everything else reset. Randy doesn't repeat lines already seen. Next festival is disabled: "coming soon" after a pass, "needs 2 stars" after a fail.
+57. **Autosave** writes during preparation on every change (not just each day, so a reload never loses a booking), once when the gates are about to open (so closing mid-day resumes at the gates and never rerolls an event), and once on reaching the results. Storage errors are ignored so the game keeps running in private browsing.
+58. **The playtest log** is kept in localStorage (`fm.log`, capped at `tuning.playtestLog.maxRecords`, 5,000, oldest dropped). Records for game actions are worked out by comparing the state before and after each action, so the reducer stays free of logging. A "quit" is starting a new game over an unfinished one. Preparation decisions are logged as `prep_decision`.
+59. **Downloads** (the log as .jsonl and the save export) use the device share sheet where the browser can share files, otherwise a normal download.
+60. **Reduced motion** is a switch in Settings (stored in `fm.settings`) as well as the system setting. It stops the festival scene animating.
+61. **Bug fixed:** an accepted offer's round was overwritten when the band was booked, so it was missing from the band's rounds and from the log.

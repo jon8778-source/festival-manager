@@ -25,7 +25,8 @@ export type ClosingKind = 'queues' | 'price' | 'bands' | 'money';
 export interface Newspaper {
   paper: string;
   headline: string;
-  opening: string;
+  /** From the best area, only when it met its target: praise for a miss would read wrong. */
+  opening: string | null;
   closing: string;
   /** One line about a big event, if one happened. */
   eventLine: string | null;
@@ -207,7 +208,7 @@ export function festivalResults(state: GameState, c: Content = defaultContent, t
     newspaper: {
       paper: n.papers[String(f.number)] ?? f.newspaper,
       headline: fillTemplate(headline, vars),
-      opening: n.opening[best],
+      opening: stars[best] ? n.opening[best] : null,
       closing: fillTemplate(n.closing[closing], vars),
       eventLine: fine > 0 ? fillTemplate(n.events.noiseFine, vars) : null,
       successLine: success ? fillTemplate(n.success[success], vars) : null,
