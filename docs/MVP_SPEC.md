@@ -1,6 +1,6 @@
 # Festival Manager: MVP specification
 
-This is the build spec for the MVP. Content (bands, emails, lines) is in CONTENT.md. All money is in pounds. Satisfaction, reputation, hype and legacy are 0 to 100 in the UI and 0 to 1 inside the formulas.
+This is the build spec for the MVP. Content (bands, cards, lines) is in CONTENT.md. All money is in pounds. Satisfaction, reputation, hype and legacy are 0 to 100 in the UI and 0 to 1 inside the formulas.
 
 ## 1. Scope
 
@@ -12,14 +12,15 @@ This is the build spec for the MVP. Content (bands, emails, lines) is in CONTENT
 ## 2. Game flow
 
 1. **Main menu (poster):** the next festival's poster is the menu. It fills in as bands are booked. Buttons: Continue planning, New game, Settings.
-2. **Preparation hub (inbox):** like Football Manager. An inbox plus a menu list: Inbox, Lineup, Negotiations, Site, Tickets, Finances. A countdown shows days to gates, and a live forecast panel (section 9) updates with every change. Continue moves time to the next email, decision or deadline.
+2. **Preparation hub (the Promoter's Board):** a board of action cards instead of an inbox (section 10). Only things that need a choice interrupt the player; information becomes a short "Since last time" summary or an update to the forecast, never a message to open. A countdown shows days to gates, a forecast strip (section 9) updates with every change, and Continue moves time to the next day with a new card, a deadline or the gates opening.
 3. **Festival day (live):** the festival runs in the background from noon to midnight. Time runs until a decision pops up, then pauses. The top bar shows the clock, the three star meters and alert chips.
 4. **Results (newspaper):** a local newspaper review with the stars, then Next festival or Replay.
 
 ## 3. Time
 
 - **Preparation length:** festival 1 is 30 days; festivals 2 and 3 are 60 days.
-- **Continue:** jumps to the next email or deadline. Preparation should take about 6 to 7 minutes of real time.
+- **Continue:** moves time to the next day that has a new card, a deadline or the gates opening. If a card is due today, Continue is replaced by "Decide first", which scrolls to that card. Preparation should take about 6 to 7 minutes of real time.
+- **First two minutes (festival 1):** Randy's welcome is one bubble of at most two sentences; the Board opens with one Task card, "Book your headliner", with the forecast strip visible but empty; the player is in a negotiation within about 90 seconds of starting a new game.
 - **Festival day:** noon to midnight in at least 5 minutes of real time (about 25 seconds per game hour at normal speed), with a 2x speed button. Time pauses at every decision.
 - **Deadlines:** facilities can be booked at the normal price until day 3; after that only as emergency units at 1.5 times the price. The lineup locks the day before the festival.
 
@@ -76,6 +77,7 @@ Constants live in one tuning config file (src/data/tuning.json) with these defau
 - Price effect = max(0.3, 1 - 1.1 x (price / perceived value - 1))
 - Attendance = clamp((0.2 + 0.8 x L) x (0.75 + 0.5 x reputation) x price effect, 0, 1)
 - Attendees = attendance x capacity
+- **Demand variation (luck):** on the day, actual attendance = clamp(attendance x (1 + v), 0, 1), where v is rolled once when the gates open with the seeded random module, uniformly between -8% and +8% (TUNE: `attendance.demandVariation` in tuning.json). The forecast uses v = 0 for its middle value and the stars estimate, and the two extremes for its range (section 9).
 
 **Income**
 - Tickets = attendees x price
@@ -120,26 +122,28 @@ Constants live in one tuning config file (src/data/tuning.json) with these defau
 ## 6. Events and decisions
 
 - **Decisions per festival day:** 3 at festival 1, 4 at festival 2, 5 at festival 3, mixing scripted and random events (see CONTENT.md).
-- Each event pauses time and shows a card with three options: A (pay to fix it), B (a cheap workaround) or C (do nothing). Each option applies: a cost as a share of R, a change to customer satisfaction, a change to band satisfaction, and sometimes a reputation change.
+- Each event pauses time and shows a card with its options: usually three, A (pay to fix it), B (a cheap workaround) or C (do nothing); the noise complaint has two, and a prepared response adds a fourth. Each option applies: a cost as a share of R, a change to customer satisfaction, a change to band satisfaction, and sometimes a reputation change.
 - **Noise complaint:** turn it down (customers -3, bands -5) or ignore it (25% chance of a fine of 5% of R). If the player installed the sound limiter during preparation (section 9), the complaint cannot happen: record it as a prevented problem.
 - **Merch decision (festivals 2 and 3):** as in CONTENT.md.
-- **Food queue:** triggers only if food capacity served is below 1.2 x attendees (the lunchtime peak). If the player built enough food, the event is skipped: Randy acknowledges it, the day moves on, and the newspaper can mention it.
+- **Food queue (one rule):** the festival-day event triggers only if food capacity is below 1.2 x attendees (the lunchtime peak), the same rule as the forecast's queue risk (section 9), using the actual attendees on the day. If the player built enough food, the event is skipped: Randy acknowledges it, the day moves on, and the newspaper can mention it.
+- **Prepared responses:** preparation can unlock a better option on the day, not only prevent a problem. If the standby set was agreed during preparation (section 9), the band-running-late event gets an extra option, "The opener plays their standby set" (the support act is the one running late), with no customer penalty and a small band boost (TUNE: bands +2). The newspaper credits it as a prepared response.
+- **Balance rule:** preparing should be as good as reacting on the day or slightly better, but never required. Re-run the careless, average and skilled player checks after any change to preparation decisions.
 - **Prevented problems** are recorded as successes and shown in the results. Never describe a prevented problem as if it happened.
 - Record each choice and how long the player took to respond (for the newspaper and the playtest log).
 
 ## 7. Bands
 
 - Stats: tier (1 to 5), reputation, legacy, hype (0 to 100), monthly listeners and a trend, fee ask, merch ask, emerging flag. The player sees reputation, hype and monthly listeners; legacy appears from festival 3.
-- **After a festival (full MVP):** if a band's slot went well (customer and band satisfaction both beat their targets), its monthly listeners rise by about 20% (emerging acts) or 5% (others). Emerging bands also gain hype and reputation and move up a tier when they pass the next tier's reputation. Their agent sends the "are flying" email, and the newspaper can run a spotlight from festival 2.
+- **After a festival (full MVP):** if a band's slot went well (customer and band satisfaction both beat their targets), its monthly listeners rise by about 20% (emerging acts) or 5% (others). Emerging bands also gain hype and reputation and move up a tier when they pass the next tier's reputation. Their agent sends the "are flying" negotiation card, and the newspaper can run a spotlight from festival 2.
 
 ## 8. Results
 
 - The newspaper review is built from: a headline chosen by star count, an opening line from the best area, a closing line from the worst area, one event line if a big event happened, and a stats box (profit, crowd, band mood, stars). Templates are in CONTENT.md.
 - **Band mood labels:** Delighted (75 and over), Happy (60 to 74), Grumbling (45 to 59), Furious (under 45).
-- **Forecast against actual:** show the forecast made before gates (attendance, income, profit) next to the actual result.
-- **Causes:** list up to three causes of the result, taken from the real values (for example a queue, an overpriced ticket, an unhappy headliner), plus one thing that went well (for example a prevented problem).
+- **Forecast against actual:** show the forecast made before gates (attendance range and middle value, income, profit) next to the actual result.
+- **Causes:** list 2 or 3 named causes, largest first, each with its size (for example "Ticket price above the fair price: -38 attendees"), plus one thing that went well (for example a prevented problem). Tag each cause **Your call** (lineup, price, facilities, decisions) or **Luck** (the demand variation, event dice rolls such as the noise fine or the standby answer). Every change to a star score must trace to at least one listed cause: no unexplained difference may remain.
 - **Cash:** always show the real figure. A negative balance is shown as a shortfall, never as zero.
-- After a failed festival, Randy gives one basic tip on the weakest star (CONTENT.md).
+- After a failed festival, Randy gives one basic tip pointing at the largest **Your call** cause (CONTENT.md).
 - **Buttons:** Next festival (if passed) and Replay.
 
 ## 9. Ticket sales during preparation
@@ -147,37 +151,50 @@ Constants live in one tuning config file (src/data/tuning.json) with these defau
 - Sales build along the curve in CONTENT.md, scaled to the forecast attendance for the current lineup, price and reputation.
 - A new ticket price takes effect from the next day. Signing a strong headliner early pulls sales forward.
 - **Lineup announcement (festivals 2 and 3):** once the headliner is signed, the player can announce the lineup for a hype boost that pulls sales forward. Announcing late loses most of the boost.
-- Emails from the box office report sales on the schedule in CONTENT.md.
+- Box office sales reports are lines in the "Since last time" summary (section 10), on the schedule in CONTENT.md. They are not messages.
 
 **Live forecast (all festivals)**
-- A forecast panel on the preparation hub, and a compact version on Lineup, Site, Tickets and Finances, shows: forecast attendance, income, spend and profit (and profit against the target), forecast customer and band satisfaction against their targets, the stars this plan would earn before any events, and queue risk (food capacity served against 1.2 x forecast attendees).
+- A forecast strip on the Board (tap it for the full panel), and a compact version on Lineup, Site, Tickets and Money, shows: forecast attendance as a range (low to high, from the demand variation at its extremes, section 4), income, spend and profit (and profit against the target), forecast customer and band satisfaction against their targets, the stars this plan would earn before any events (from the middle value), and queue risk (food capacity against 1.2 x forecast attendees).
+- **Break-even:** "You break even at N people", where N = fixed costs / (ticket price + net vendor income per attendee). Fixed costs are everything committed that doesn't depend on attendance (overhead, fees, facilities, decision costs); net vendor income per attendee is the food, drink and merch spend per head less the bands' merch cut per head. If the venue capacity is below break-even, show a red warning before the gates open.
+- **Cash at risk:** the loss if attendance comes in at the low end of the range (none if that still makes a profit).
 - It recalculates instantly from the same core formulas whenever the lineup, ticket price, facilities or a preparation decision changes. Label it "Forecast before events".
-- When the gates open, store a snapshot of the forecast; the results screen compares it with the actual outcome (section 8).
+- When the gates open, store a snapshot of the forecast, including the range as well as the middle value; the results screen compares it with the actual outcome (section 8).
 
 **Preparation decisions**
-- Some inbox emails are decisions. They use the same card as festival-day events: three options with their cost and effects shown, and time pauses until the player chooses.
-- Festival 1 has two: the sound limiter (always) and the slow-sales warning (only if forecast attendance is below 80% of capacity on the check day). Festivals 2 and 3 reuse both, alongside the lineup announcement. Details, costs and timings are in CONTENT.md.
+- Some Board cards are decisions. They open the same card as festival-day events in place: options with their cost and effects shown, and time waits until the player chooses.
+- Festival 1 has three: the sound limiter (always), the slow-sales warning (only if forecast attendance is below 80% of capacity on the check day) and the standby set (day 12, only once an opener is booked). Festivals 2 and 3 reuse all three (the standby set on day 25), alongside the lineup announcement and later rain cover. Details, costs and timings are in CONTENT.md.
+- **Standby set** (from the opener's agent): A pays the opener to stay on standby for a longer set (TUNE: about the cost of the band-running-late option A); B asks them unpaid (free, bands -2, a 50% chance they agree, rolled with the seeded random module and told to the player straight away); C declines. If agreed, the festival day gets the prepared response in section 6.
 - Choices are recorded in the playtest log, and prevented problems feed the results.
 
 ## 10. Screens (portrait)
 
 - **Main menu:** the festival poster (headliner large, then the other acts), days to gates, Continue planning, New game, Settings.
-- **Preparation hub:** top bar with days to gates and cash; Randy's latest message; menu rows for Inbox (unread count), Lineup (slots filled), Negotiations (open), Site, Tickets (price), Finances; a Continue button.
-- **Inbox:** a list of emails; each opens with its buttons, which jump to the right screen.
-- **Lineup:** headliner, support and opener slots; a band list with tier, genre, monthly listeners and hype; a selected band card with Randy's market-rate hint and a Make an offer button; a summary line with ticket price, forecast attendance and forecast profit.
+- **Promoter's Board (preparation hub):**
+  1. Top bar: the countdown ("Gates in 18 days") and the Continue button (or "Decide first").
+  2. Forecast strip: the attendance range, profit against target and the stars this plan would earn. Tapping it opens the full forecast panel.
+  3. Action cards: the things that need the player now, at most 4 at once, most urgent first. Each card shows who it is from (portrait and name), a title, a deadline chip if it has one, and one primary button. Card types: **Decision** (preparation decisions; opens the decision card in place), **Negotiation** (band agent replies, counter-offers and patience warnings; opens that band's negotiation), **Task** (setup steps and deadlines: book a headliner, book facilities by day 3, set the ticket price; opens the right tab) and **Warning** (reminders such as no headliner by day 10; opens the right tab and turns red as the deadline gets close).
+  4. Bottom tabs: Board, Lineup (negotiations live here), Site, Tickets, Money. There is no Inbox and no separate Negotiations item.
+- **"Since last time" summary:** after each Continue, one dismissible panel lists what changed: tickets sold since the last stop, the change in forecast attendance, and any new cards (for example "Day 14 → Day 20: 86 tickets sold. Forecast 412–468. The Velvet Owls' agent replied."). Pure flavour messages are turned into a decision card or cut: nothing is left that can only be read.
+- **Randy:** tutorial and tip lines show as a speech bubble attached to the relevant card or tab, with the skip button.
+- **Rule:** no screen in preparation shows text that needs no action and can't be dismissed in one tap.
+- **Lineup:** headliner, support and opener slots; the bands in talks, with their state; a band list with tier, genre, monthly listeners and hype; a selected band card with Randy's market-rate hint and a Make an offer button; a summary line with ticket price, forecast attendance and forecast profit.
 - **Negotiation:** band header (name, tier, genre, monthly listeners), festival and band reputation bars, legacy (from festival 3), hype and mood; an offer table with rows for fee, bill position (showing who else is on the bill) and merch split, each with Randy's market rate, the player's offer and a verdict (OK, Close, Low); the band's response with mood and rounds left; buttons Submit offer, Accept counter and Walk away.
 - **Site:** a fixed map (no zoom) with the main stage, crowd area and facility plots; a build tray (food stall and toilets at £300 per unit at festival 1, the bar from festival 2); capacity and queue status. Tap a tray item, then tap a plot.
 - **Tickets:** price slider with Randy's fair-price hint and the forecast attendance.
-- **Finances:** budget, spend so far by category, forecast profit and the profit target; from festival 2, the promoter advance and its fee.
-- **Festival day:** clock, Paused chip, speed button; three star meters (profit, crowd, bands); a live placeholder scene; alert chips; event cards with three stacked options.
-- **Results:** the newspaper review, forecast against actual and the causes, then Next festival or Replay.
+- **Money (was Finances):** budget, spend so far by category, forecast profit and the profit target, break-even and cash at risk; from festival 2, the promoter advance and its fee. An optional **History** list keeps past summaries and decisions for players who want them; it is never required.
+- **Festival day:** clock, Paused chip, speed button; three star meters (profit, crowd, bands); a live placeholder scene; alert chips; event cards with stacked options (two to four).
+- **Results:** the newspaper review, forecast against actual and the named causes (Your call or Luck), then Next festival or Replay.
 
 **Accessibility basics (all screens):** readable text sizes, sufficient contrast, never rely on colour alone (use icons or labels with colours), a reduced-motion setting, and touch targets of at least 44px.
 
 ## 11. Save and playtest log
 
-- **Save:** one slot, stored as JSON in the browser's localStorage, autosaved at the end of each phase (preparation day, festival day, results). Include a version number, the random seed and any pending decision, so that loading never rerolls an outcome. Add an export and import button in Settings so a save survives clearing the browser.
-- **Playtest log:** store one JSON record per event in the browser (IndexedDB, or localStorage if small): session start and end, screen changes, each negotiation round (band, offer, score, result), each event choice (event, option, seconds to respond), festival results (stars, profit percentage, customer and band satisfaction, attendance), replays and quits. Add a button in Settings that downloads the log as a .jsonl file (and uses the device share sheet where available).
+- **Save:** one slot, stored as JSON in the browser's localStorage, saved after every commitment: a band signed, a facility placed or removed, the price set, a card decided, and each festival-day decision. The save includes the schema version, the random seed and the random state, and any pending decision, so reloading never rerolls a result.
+- **Versions:** if a save's version is older than the game's, migrate it or show a clear message. Never silently corrupt it.
+- **Export and import:** Settings has **Export save** (copy a text code) and **Import save** (paste a code), because browsers can delete stored data.
+- **Persistent storage:** request it on first launch, and carry on normally if the browser refuses.
+- **Real-phone test:** lock the screen mid-decision, switch apps, refresh, and go offline. Each case must restore exactly the committed state.
+- **Playtest log:** store one JSON record per event in the browser (IndexedDB, or localStorage if small): session start and end, screen changes, each negotiation round (band, offer, score, result), each event choice (event, option, seconds to respond), festival results (stars, profit percentage, customer and band satisfaction, attendance), replays and quits; the seconds from a new game to the first negotiation opened; for each card, when it was shown, when it was acted on and whether it went past its deadline; and how many times the player opened History (a low count is fine: it shows the summary is enough). Add a button in Settings that downloads the log as a .jsonl file (and uses the device share sheet where available).
 
 ## 12. Test vectors (festival 1, no events)
 
@@ -195,9 +212,10 @@ Use these to check the economy code. Inputs: capacity 500, fair price £25 (so P
 ## 13. Milestones and acceptance criteria
 
 1. **Greybox (first playable):** a new game starts festival 1 with Randy's welcome. The player can book three bands through negotiation, place facilities, set a ticket price while watching the live forecast, answer the preparation decision emails, Continue through preparation, play the festival day with its three decisions, and see the newspaper review with stars. Replay works. Save, load and the playtest log work. All unit tests pass, and the build is published to the playtest link.
-2. **Economy:** every income and cost line is visible in Finances; ticket sales follow the curve; the box office emails show real numbers.
+1a. **Playtest revision (spec changes of 21 October):** the Promoter's Board replaces the inbox (cards, "Since last time" summary, bottom tabs, Randy on cards); the forecast shows a range, break-even and cash at risk; results name their causes as Your call or Luck, and every star change traces to a cause; the standby set unlocks a prepared response on the day; saves are made after every commitment, migrate older versions, export and import as a text code and ask for persistent storage; one food queue rule. Acceptance: no preparation screen shows text that needs no action and can't be dismissed in one tap, and a new player reaches a real choice within 2 minutes without help.
+2. **Economy:** every income and cost line is visible in Money; ticket sales follow the curve; the box office lines in the summary show real numbers.
 3. **Facilities:** food stalls and toilets are tracked separately, with queues per facility (the bar arrives at festival 2).
-4. **Progression (full MVP):** festivals 2 and 3, the promoter advance, reputation carried over, emerging band growth and listener spikes, the lineup announcement, the weather forecast email, the merch decision, festival 3's second stage with clashes and sound bleed, and the newspaper spotlight.
+4. **Progression (full MVP):** festivals 2 and 3, the promoter advance, reputation carried over, emerging band growth and listener spikes, the lineup announcement, the weather forecast card, the merch decision, festival 3's second stage with clashes and sound bleed, and the newspaper spotlight.
 5. **Polish:** real UI styling, basic audio, a tidy tutorial, the game installable from the browser (a progressive web app), and a playtest link shared with 5 or more playtesters.
 
 ## 14. Later milestones (from the October design review)
@@ -210,3 +228,9 @@ These ideas came out of a design review. They are good candidates, but each is a
 - **Set-time planning:** clashes and sound bleed calculated from the actual timetable rather than at random.
 - **Finance:** an optional advance with a smaller plan to compare, three cash checkpoints (after deposits, before gates, after settlement), and separate Replan (cash or contract problem) and Replay (missed targets) results.
 
+## 15. Not changing now (recorded so they aren't lost)
+
+- **Audience promise mechanic:** test after the first playable.
+- **Package deals versus three-round negotiation:** A/B test during playtesting before changing the negotiation system.
+- **Rewarded ads:** when they are added after the MVP, they must never give cash or anything that affects balance. Test a free first festival plus a one-off unlock as the alternative.
+- **Playtests:** aim for about 12 players. Measure whether they can explain why they got their result, and whether they start another festival when they're free to stop.

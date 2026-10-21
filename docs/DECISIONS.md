@@ -6,7 +6,7 @@ Decisions made where the spec was unclear or needed a concrete choice.
 
 ## Milestone 1 plan (approved 19 October 2026)
 
-The full list is in section 9 of [PLAN.md](PLAN.md). In short:
+The full list is in section 9 of [PLAN_MILESTONE1.md](PLAN_MILESTONE1.md). In short:
 
 1. **Emerging bands** get a 10% discount on the required fee (`emergingDiscount` in tuning.json) and expect one slot higher than their tier. This makes the Mud Pies test vector work: £378 × 0.9 × 1.1 = £374, so £380 for the opener is accepted.
 2. **A rejection** (score below 0.8) costs a round of patience and lowers mood. It doesn't end talks; talks close only when patience runs out.
@@ -89,3 +89,15 @@ The full list is in section 9 of [PLAN.md](PLAN.md). In short:
 63. **Step 6 was not on main:** PR #4 was merged before the results, save and log commits were pushed, so this step's PR carries them.
 64. **Fixes from the check:** Next festival was an active-looking button that did nothing after a pass (now plainly disabled); bands paid exactly their asking fee were listed as underpaid because of floating-point rounding; the "Crowd area" label on the site map had too little contrast (4.2:1, now above 4.5:1); the main menu's continue button now says what it does in each phase.
 65. **Layout audit:** every screen was checked at 360 × 740 and 820 × 1180 for sideways overflow, touch targets under 44 px and text contrast below WCAG AA. There's a short playtester checklist in `docs/PLAYTEST.md`.
+
+## Spec changes of 21 October (milestone 1a plan, approved 21 October 2026)
+
+The changes from the playtests and competitor research are written into MVP_SPEC.md and CONTENT.md, and the build plan is in [PLAN.md](PLAN.md). The milestone 1 plan moved to [PLAN_MILESTONE1.md](PLAN_MILESTONE1.md).
+
+66. **Demand variation** is ±8% (TUNE), rolled once with the seeded random module when the gates open. The forecast's middle value uses no variation; its range uses the two extremes.
+67. **The standby set comes from the opener**, not the support act, because the band running late is the support act. The day option is "The opener plays their standby set". The card needs an opener booked.
+68. **Results causes come in one list**, measured against a fair-value baseline, so plan choices (such as the ticket price), day choices and luck all appear. Causes are worked out by removing one factor at a time so their sizes add up exactly to the difference; anything beyond the top 2 or 3 goes in one "Other" line.
+69. **npm run content** (never built in milestone 1) is built as the last step of the plan. Until then the JSON in src/data stays hand-written.
+70. **Randy's welcome** was cut to two sentences for the "first two minutes" rule: "Randy Popping, forty years of muddy fields and missing headliners. Let's get you through your first festival without either."
+71. **Emails that only gave information** became "Since last time" summary lines (sales, deals, lapsed offers, the headliner news) or were cut (booking confirmed, the venue's noise reminder, the review email). The sales-slow, nearly-sold-out and tickets-live emails are summary lines.
+72. **New tip lines** for Randy, one per kind of Your call cause (price, queues, a thin bill, band pay, day decisions, spending), are drafts for review in CONTENT.md section 5. The weakest-star tips stay as the fallback.

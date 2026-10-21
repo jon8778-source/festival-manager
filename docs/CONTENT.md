@@ -58,6 +58,7 @@ Costs are a share of full-scale ticket revenue (R). Satisfaction and reputation 
 | Band running late | 1 | Scripted, early afternoon | A | Stretch the opener's set (overtime, about £60) | 0.5% | 0 | 0 | 0 |
 |   |   |   | B | Play music over the speakers | 0 | -3 | 0 | 0 |
 |   |   |   | C | Cut the late band's set short | 0 | -1 | -5 | 0 |
+|   |   |   | D | The opener plays their standby set (only if the standby set was agreed in preparation; a prepared response) | 0 | 0 | +2 (TUNE) | 0 |
 | Noise complaint | 1, then random | Scripted in the evening at festival 1; then up to once per festival (50%) | A | Turn it down | 0 | -3 | -5 | 0 |
 |   |   |   | B | Ignore it: 25% chance of a fine of 5% of R (about £625 at festival 1) | 0 or 5% | 0 | 0 | 0 |
 | Stage equipment breaks | 2 | Scripted, mid-afternoon | A | Hire a replacement (about £1,350) | 3% | 0 | 0 | 0 |
@@ -87,7 +88,7 @@ Costs are a share of full-scale ticket revenue (R). Satisfaction and reputation 
 
 ## 3b. Preparation decisions
 
-Shown as inbox emails with a decision card. Costs are a share of full-scale ticket revenue (R); festival 1 amounts in brackets.
+Shown as Decision cards on the Promoter's Board, which open the decision card in place. Costs are a share of full-scale ticket revenue (R); festival 1 amounts in brackets.
 
 | Decision | From | When | Option | What the player does | Cost (share of R) | Effect |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -97,34 +98,63 @@ Shown as inbox emails with a decision card. Costs are a share of full-scale tick
 | Slow sales | Box office | Check on festival 1 day 14 (festivals 2 and 3: day 30); only if forecast attendance is below 80% of capacity | A | Cut the ticket price by 8% of the fair price (about £2) from tomorrow | 0 | Lower price, higher demand, as the formulas say |
 |   |   |   | B | Put up posters around the area (about £150) | 1.2% | Forecast attendance +3 points (capped at 100%) |
 |   |   |   | C | Hold your nerve | 0 | No change |
+| Standby set | {opener_band}'s agent | Festival 1: day 12. Festivals 2 and 3: day 25. Only once an opener is booked | A | Pay the opener to stay on standby for a longer set, in case anyone runs late (about £60) | 0.5% (TUNE: about the cost of band running late, option A) | On the day, band running late gets option D |
+|   |   |   | B | Ask them to stay on standby unpaid | 0 | Bands -2; a 50% chance they agree, told to the player straight away; if they agree, option D as above |
+|   |   |   | C | Decline | 0 | No change |
 
-## 4. Inbox emails
+## 4. Promoter's Board cards
 
-| # | From | When it arrives | Subject | Message | Buttons |
-| --- | --- | --- | --- | --- | --- |
-| 1 | Randy Popping | Preparation starts | Welcome to the Village Green | "Right then. You've {days_to_gates} days, £{cash} and a field. Book a headliner first; everything else follows." | Open lineup |
-| 2 | Randy Popping | No headliner with 10 days to go | Still no headliner | "Bands won't sign for a festival without a name at the top. Sort the headliner before the rest." | Open lineup |
-| 3 | {band_name}'s agent | Offer accepted | {band_name}: you've got a deal | "Happy to confirm {band_name} for the {slot} slot at £{fee}, with {merch_pct}% of the merch. See you on the day." | View contract |
-| 4 | {band_name}'s agent | Band counters | {band_name}: counter-offer | "Thanks for the offer. {band_name} would do it for £{counter_fee}, the {counter_slot} slot and {counter_merch}% of the merch. Let us know within {days_left} days." | Accept, Negotiate, Walk away |
-| 5 | {band_name}'s agent | Offer rejected | {band_name}: not this time | "We're going to pass on this one. Do come back to us next year." | Find another act |
-| 6 | {band_name}'s agent | Patience runs out | {band_name} has moved on | "We've gone round a few times now, and the band has taken another date. No hard feelings." | Find another act |
-| 7 | {band_name}'s agent | Emerging band gets in touch | {band_name} would love a slot | "{band_name} are building a following: {listeners} monthly listeners and rising. They'd play an early slot for a modest fee." | Make an offer, Not now |
-| 8 | Box office | Tickets go on sale | Tickets are live | "Tickets went on sale at £{price}. We'll send you a sales update each week." | Change price |
-| 9 | Box office | On the box office schedule (see the timeline) | Sales update: {sold_pct}% sold | "{tickets_sold} of {capacity} tickets sold with {days_to_gates} days to go. At this rate we expect about {forecast} people on the day." | View tickets |
-| 10 | Box office | Forecast below 60% of capacity | Sales are slow | "We're heading for about {forecast} people, {forecast_pct}% of the field. A bigger name on the bill or a lower price usually helps." | View lineup, Change price |
-| 11 | Box office | Over 90% sold | Nearly sold out | "Only {remaining} tickets left. Make sure your toilets and food can cope with a full field." | Open site |
-| 12 | Field & Flush Hire | Facilities booked | Booking confirmed: {units} {facility} | "We'll deliver {units} {facility} on the morning of the festival. Total: £{cost}." | View site |
-| 13 | Randy Popping | Ticket sales exceed facility capacity | Mind the queues | "You've sold {tickets_sold} tickets and have toilets for {capacity_served}. I've seen queues start fights over less." | Open site |
-| 14 | The Village Gazette | Headliner booked | Village Green lands {band_name} | "{band_name} will headline this year's Village Green, organisers have confirmed. Tickets from £{price}." (gives a small hype boost) | Read |
-| 15 | Randy Popping | A slot still empty with 3 days to go | You've an empty slot | "Your {slot} slot is still empty. An empty stage makes for a quiet field." | Open lineup |
-| 16 | Randy Popping | Day before the festival | Gates open tomorrow | "Last chance to check the site. Once the gates open, it's too late to add a toilet." | Open site, Start festival |
-| 17 | The Village Gazette | After the festival | Our review of the Village Green | The newspaper review, which opens the results screen. | Read the review |
-| 18 | Village Green Trust (the venue) | After the headliner is booked | Noise limits for the day | "A reminder that music must stay under the agreed limit and finish by 11pm. Complaints from the village go to the council, who may fine you." | Got it |
-| 19 | Mrs Hartley, Church Lane (local resident) | During the festival (a decision) | Noise complaint | "The music is rattling my windows and the dog won't settle. Please turn it down." Turn it down: customers -3, bands -5. Ignore it: 25% chance of a fine of 5% of full-scale ticket revenue (about £625 at festival 1). | Turn it down, Ignore it |
-| 20 | Fieldcast Weather | 5 days before festival 2 | Weekend forecast: {forecast} | "Showers likely on {day} afternoon ({rain_chance}% chance). Worth thinking about cover." | Open site |
-| 22 | Village Green Trust (the venue) | Sound limiter decision (see 3b) | Keeping the village happy | "We had complaints last year about the music. You can install a sound limiter for £{cost}, agree to finish at 10:30pm, or take your chances." | Install limiter, Finish at 10:30, Decline |
-| 23 | Box office | Slow-sales check (see 3b) | Sales need a push | "We're forecasting {forecast} people, {forecast_pct}% of the field. We can drop the price by £{price_cut}, put posters up around the area for £{poster_cost}, or wait and see." | Cut price, Posters, Wait |
-| 21 | {band_name}'s agent | After a festival, if an emerging act had a good slot | {band_name} are flying | "Since your festival, {band_name} have gone from {old_listeners} to {new_listeners} monthly listeners. They'd love to come back." | Make an offer, Not now |
+Only things that need a choice interrupt the player. Each card has one primary button. Card types: **decision** (opens the decision card in place), **negotiation** (opens that band's talks), **task** (a setup step, opens the right tab), **warning** (a reminder, opens the right tab and turns red as its deadline gets close) and **summary** (a line in the "Since last time" panel after Continue; never a card of its own). The Board shows at most 4 cards, most urgent first. Days are days to gates. Bodies are at most two short sentences.
+
+### Festival 1 cards
+
+| id | Type | From | Trigger | Deadline | Title | Body | Button |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| book-headliner | task | Randy Popping | New game (the only card at the start) | Day 10 | Book your headliner | "It's the headliner that sells the tickets. Start at the top." | Open lineup |
+| no-headliner | warning | Randy Popping | Day 10, no headliner booked (replaces book-headliner) | Day 1 (lineup locks) | Still no headliner | "Bands won't sign for a festival without a name at the top. Sort the headliner before the rest." | Open lineup |
+| fill-bill | task | Randy Popping | Headliner signed, a slot still empty | Day 1 (lineup locks) | Book the opener and support | "Cheaper acts, and one of them might be the next big thing." | Open lineup |
+| empty-slot | warning | Randy Popping | Day 3, for each empty slot | Day 1 (lineup locks) | Your {slot} slot is empty | "An empty stage makes for a quiet field." | Open lineup |
+| book-facilities | task | Field & Flush Hire | Headliner signed | Day 3 | Book toilets and food by day 3 | "{capacity} people need somewhere to go and something to eat. After day 3 it's emergency prices." | Open site |
+| set-price | task | Box office | Headliner signed | Day 26 (tickets on sale) | Set the ticket price | "Tickets go on sale in {days_to_sale} days. A fair price is £{fair_price}." | Open tickets |
+| counter | negotiation | {band_name}'s agent | Band counters | Counter lapses (3 days) | {band_name} countered | "£{counter_fee}, the {counter_slot} slot and {counter_merch}% of the merch." | Open talks |
+| patience | negotiation | {band_name}'s agent | One round of patience left, no counter on the table | None | {band_name} are losing patience | "One more low offer and they'll walk." | Open talks |
+| emerging | negotiation | {band_name}'s agent | Day 20, The Mud Pies, if still available and a slot is empty | Day 1 (lineup locks) | {band_name} would love a slot | "{listeners} monthly listeners and rising. They'd play an early slot for a modest fee." | Make an offer |
+| sound-limiter | decision | Village Green Trust (the venue) | Day 20 | Day 20 (due today) | Keeping the village happy | "We had complaints about the music last year. A limiter costs £{cost}, or you could finish at 10:30pm." | Decide |
+| slow-sales | decision | Box office | Day 14, only if forecast attendance is below 80% | Day 14 (due today) | Sales need a push | "We're forecasting {forecast} people, {forecast_pct}% of the field. We can cut the price by £{price_cut} or put up posters for £{poster_cost}." | Decide |
+| standby | decision | {band_name}'s agent (the opener) | Day 12, only once an opener is booked | Day 12 (due today) | Standby set? | "{band_name} could stay on standby for a longer set in case anyone runs late. Shall we arrange it?" | Decide |
+| queues | warning | Randy Popping | Tickets sold pass the people the site can serve | Day 3 (normal facility prices end) | Mind the queues | "You've sold {tickets_sold} tickets and have toilets for {capacity_served}. I've seen queues start fights over less." | Open site |
+| gates-tomorrow | warning | Randy Popping | Day 1 | Day 0 (gates open) | Gates open tomorrow | "Last chance to check the site. Once the gates open, it's too late to add a toilet." | Open site |
+
+### "Since last time" summary lines
+
+| id | Trigger | Line |
+| --- | --- | --- |
+| days | Every Continue | "Day {from_day} → Day {to_day}." |
+| sales | Every Continue once tickets are on sale (replaces the box office sales emails) | "{sold_since} tickets sold ({tickets_sold} of {capacity})." |
+| forecast | Every Continue | "Forecast {low}–{high}." |
+| tickets-live | Day 26 | "Tickets went on sale at £{price}." |
+| deal-done | A band signs | "{band_name} signed for the {slot} slot at £{fee}, with {merch_pct}% of the merch." |
+| rejected | Talks end with a rejection | "{band_name} passed on your offer." |
+| moved-on | Patience runs out | "{band_name} have taken another date." |
+| counter-lapsed | A counter-offer lapses | "{band_name}'s offer lapsed." |
+| headliner-news | Headliner signed (a small hype boost) | "The Village Gazette: {band_name} to headline the {festival}." |
+| sales-slow | On a sales day, forecast below 60% of capacity | "Box office: heading for {forecast_pct}% of the field. A bigger name or a lower price usually helps." |
+| nearly-sold-out | Over 90% sold | "Box office: only {remaining} tickets left." |
+| standby-answer | The standby set, option B | "{band_name} agreed to stand by." or "{band_name} can't stand by unpaid." |
+| new-cards | New cards arrived | "New: {card_titles}." |
+
+### Cut or moved
+- **Welcome email:** now Randy's welcome bubble (section 5).
+- **Booking confirmed** and **Noise limits for the day** (the venue's reminder): cut. Facility bookings show on the site at once, and the sound limiter card covers the noise rule.
+- **Our review of the Village Green:** cut; the results screen opens directly.
+- **Mrs Hartley's noise complaint:** stays as the festival-day event card (section 3).
+
+### Festivals 2 and 3 cards (drafts)
+
+| id | Type | From | Trigger | Deadline | Title | Body | Button |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| weather | decision (rain cover, later) | Fieldcast Weather | 5 days before festival 2 | Day 5 (due today) | Weekend forecast: {forecast} | "Showers likely on {day} afternoon ({rain_chance}% chance). Worth thinking about cover." | Decide |
+| flying | negotiation | {band_name}'s agent | After a festival, if an emerging act had a good slot | Next festival's lineup lock | {band_name} are flying | "Since your festival they've gone from {old_listeners} to {new_listeners} monthly listeners. They'd love to come back." | Make an offer |
 
 ## 5. Randy Popping
 
@@ -132,34 +162,36 @@ Randy is a retired promoter: an old British voice, dry, fond and a little weary,
 
 ### Festival 1 tutorial lines
 
-| Step | When | Randy says |
-| --- | --- | --- |
-| 1. Welcome | Game starts | "Randy Popping. Forty years of muddy fields and missing headliners. Let's get you through your first festival without either." |
-| 1. Welcome | Budget screen opens | "You've got £{cash} to play with. Bands, toilets, food and the field all come out of that, so don't blow it on the headliner." |
-| 1. Welcome | Targets panel | "Three stars to chase: make a profit, keep the crowd happy, keep the bands happy. Get two and you're through to next year." |
-| 2. Lineup | Lineup screen opens | "Three slots: opener, support and headliner. Start at the top. It's the headliner that sells the tickets." |
-| 2. Lineup | First negotiation opens | "This is {band_name}. Acts like this usually go for £{rate_low} to £{rate_high}. Make them an offer and see what comes back." |
-| 2. Lineup | Offer table | "You've three things to play with: the fee, where they sit on the bill, and their cut of the merch." |
-| 2. Lineup | Band counters | "A counter. That's a good sign: they want the gig. Meet them part way, or offer a bigger merch cut. Just remember their cut comes out of what you sell." |
-| 2. Lineup | Deal accepted | "Signed. Remember what you paid. A happy band plays a better set." |
-| 2. Lineup | Band walks away | "Ah, they've walked. No harm done. Try another act." |
-| 2. Lineup | Headliner booked | "Now the opener and support. Cheaper acts, and one of them might be the next big thing." |
-| 3. Build | Site map opens | "Now the field. Stage first, then toilets and food. 500 people need somewhere to go and something to eat, in that order." |
-| 3. Build | Forecast panel first shown | "This is your forecast. Change anything and it updates. It's a guess, not a promise, but it's a good guess." |
-| 3. Build | Sound limiter email | "A limiter's cheap insurance. Village folk complain about noise; they always have." |
-| 3. Build | Ticket price | "A fair price is £{fair_price}. Go above it and fewer come; go below it and the profit gets thin." |
-| 4. Run | Gates open | "Gates are open. Keep an eye on the bars at the top: the crowd, the bands and your three targets." |
-| 4. Run | Food queue (scripted, midday) | "There's a queue at the food stall. Get a food van in before tempers fray." |
-| 4. Run | Queue fixed | "Good. Problems only get bigger the longer you leave them." |
-| 4. Run | No queue (enough food built) | "No queue at the food stalls. That's what planning buys you." |
-| 4. Run | Band running late (scripted) | "Your support act is stuck on the A-road. Stretch the opener's set, or fill the gap with music over the speakers." |
-| 4. Run | Complaint prevented (limiter or early finish) | "Not a peep from the village. That limiter's earned its keep." |
-| 4. Run | Noise complaint | "Someone's complained about the noise. Turn it down and the crowd grumbles; ignore it and you might get fined." |
-| 4. Run | Headliner goes on | "That's your headliner on. This is the bit everyone remembers." |
-| 5. Results | Results screen | "Here's how you did: {stars} stars out of three." |
-| 5. Results | Passed | "Not bad at all. Next year they'll give you a bigger field and bigger names." |
-| 5. Results | Failed | "Not this time. Have another go, and I'll tell you what went wrong." |
-| Any | Skip button | "Want to skip the chat? Go on, I won't be offended." |
+Each line shows as a speech bubble attached to the card or tab in the "Shows on" column, once, with the skip button.
+
+| Step | When | Shows on | Randy says |
+| --- | --- | --- | --- |
+| 1. Welcome | Game starts | The Board (welcome bubble, the only line before the first card) | "Randy Popping, forty years of muddy fields and missing headliners. Let's get you through your first festival without either." |
+| 1. Welcome | Budget screen opens | Money tab, first opened | "You've got £{cash} to play with. Bands, toilets, food and the field all come out of that, so don't blow it on the headliner." |
+| 1. Welcome | Targets panel | Forecast strip, after the first band signs | "Three stars to chase: make a profit, keep the crowd happy, keep the bands happy. Get two and you're through to next year." |
+| 2. Lineup | Lineup screen opens | Lineup tab, first opened | "Three slots: opener, support and headliner. Start at the top. It's the headliner that sells the tickets." |
+| 2. Lineup | First negotiation opens | The negotiation, first opened | "This is {band_name}. Acts like this usually go for £{rate_low} to £{rate_high}. Make them an offer and see what comes back." |
+| 2. Lineup | Offer table | The offer table, after the line above | "You've three things to play with: the fee, where they sit on the bill, and their cut of the merch." |
+| 2. Lineup | Band counters | The band's negotiation card | "A counter. That's a good sign: they want the gig. Meet them part way, or offer a bigger merch cut. Just remember their cut comes out of what you sell." |
+| 2. Lineup | Deal accepted | The negotiation, on the first signing | "Signed. Remember what you paid. A happy band plays a better set." |
+| 2. Lineup | Band walks away | The negotiation, when a band walks | "Ah, they've walked. No harm done. Try another act." |
+| 2. Lineup | Headliner booked | The fill-bill card | "Now the opener and support. Cheaper acts, and one of them might be the next big thing." |
+| 3. Build | Site map opens | Site tab, first opened | "Now the field. Stage first, then toilets and food. 500 people need somewhere to go and something to eat, in that order." |
+| 3. Build | Forecast panel first shown | The full forecast panel, first opened | "This is your forecast. Change anything and it updates. It's a guess, not a promise, but it's a good guess." |
+| 3. Build | Sound limiter card | The sound limiter card | "A limiter's cheap insurance. Village folk complain about noise; they always have." |
+| 3. Build | Ticket price | Tickets tab, first opened | "A fair price is £{fair_price}. Go above it and fewer come; go below it and the profit gets thin." |
+| 4. Run | Gates open | Festival day | "Gates are open. Keep an eye on the bars at the top: the crowd, the bands and your three targets." |
+| 4. Run | Food queue (scripted, midday) | Festival day | "There's a queue at the food stall. Get a food van in before tempers fray." |
+| 4. Run | Queue fixed | Festival day | "Good. Problems only get bigger the longer you leave them." |
+| 4. Run | No queue (enough food built) | Festival day | "No queue at the food stalls. That's what planning buys you." |
+| 4. Run | Band running late (scripted) | Festival day | "Your support act is stuck on the A-road. Stretch the opener's set, or fill the gap with music over the speakers." |
+| 4. Run | Complaint prevented (limiter or early finish) | Festival day | "Not a peep from the village. That limiter's earned its keep." |
+| 4. Run | Noise complaint | Festival day | "Someone's complained about the noise. Turn it down and the crowd grumbles; ignore it and you might get fined." |
+| 4. Run | Headliner goes on | Festival day | "That's your headliner on. This is the bit everyone remembers." |
+| 5. Results | Results screen | Results screen | "Here's how you did: {stars} stars out of three." |
+| 5. Results | Passed | Results screen | "Not bad at all. Next year they'll give you a bigger field and bigger names." |
+| 5. Results | Failed | Results screen | "Not this time. Have another go, and I'll tell you what went wrong." |
+| Any | Skip button | Every bubble | "Want to skip the chat? Go on, I won't be offended." |
 
 ### Festival 2 lines
 
@@ -193,7 +225,18 @@ Randy is a retired promoter: an old British voice, dry, fond and a little weary,
 
 ### Basic tip after a failed festival
 
-| Weakest star | Randy says |
+Randy's tip points at the largest **Your call** cause in the results (MVP_SPEC section 8). The cause lines in the first table are new drafts for review; the star lines are kept as the fallback when no Your call cause stands out.
+
+| Largest Your call cause | Randy says |
+| --- | --- |
+| Ticket price | "Your ticket price cost you a crowd. Stay nearer the fair price, or give them a lineup worth paying for." |
+| Facilities (queues) | "The queues did the damage. A few more toilets and food stalls before day 3 cost less than a grumpy crowd." |
+| Lineup (a thin or empty bill) | "The bill was thin. Fill every slot, and spend where it sells tickets: the headliner." |
+| Band pay | "The bands weren't happy. Pay closer to their asking price, and give them the slot they want." |
+| Decisions on the day | "Leaving problems on the day cost you. A small fix early is cheaper than a fed-up field." |
+| Spending | "You spent more than the day brought in. Next time, trim the lineup or nudge the ticket price." |
+
+| Weakest star (fallback) | Randy says |
 | --- | --- |
 | Profit | "You spent more than the day brought in. Next time, trim the lineup or nudge the ticket price." |
 | Customers | "The crowd went home grumbling. Look at your queues and your ticket price first." |
@@ -223,8 +266,8 @@ Papers: The Village Gazette (festival 1), The County Courier (festival 2), The W
 
 | Festival | Preparation days | Key moments |
 | --- | --- | --- |
-| 1 | 30 | Day 30: Randy's welcome. Day 26: tickets on sale. Sales updates on days 16, 14, 7 and 3. Day 20: sound limiter decision. Day 14: slow-sales check (decision only if forecast attendance is below 80%). Day 10: reminder if there's no headliner. Day 3: reminder for any empty slot, and the last day to book facilities at the normal price. Day 1: "Gates open tomorrow". Day 0: festival day. |
-| 2 | 60 | Day 60: promoter advance offer. Day 50: tickets on sale. Lineup announcement once the headliner is signed (aim for around day 40). Sales updates every 14 days, then weekly for the last 2 weeks. Day 5: weather forecast. Otherwise as festival 1. |
+| 1 | 30 | Day 30: Randy's welcome bubble and the "Book your headliner" card. Day 26: tickets on sale. Sales lines in the summary on days 16, 14, 7 and 3. Day 20: sound limiter card (and The Mud Pies' card). Day 14: slow-sales check (a card only if forecast attendance is below 80%). Day 12: standby set card (once an opener is booked). Day 10: warning if there's no headliner. Day 3: warning for any empty slot, and the last day to book facilities at the normal price. Day 1: "Gates open tomorrow" warning. Day 0: festival day. |
+| 2 | 60 | Day 60: promoter advance offer. Day 50: tickets on sale. Lineup announcement once the headliner is signed (aim for around day 40). Sales lines in the summary every 14 days, then weekly for the last 2 weeks. Day 25: standby set card. Day 5: weather forecast card. Otherwise as festival 1. |
 | 3 | 60 | Day 60: second stage unlocked. Day 50: tickets on sale. Lineup announcement once the headliner is signed (aim for around day 40). Day 10: set times locked, with clashes and sound bleed checked. Otherwise as festival 2. |
 
 | Ticket sales window | Share of final sales |
@@ -235,6 +278,6 @@ Papers: The Village Gazette (festival 1), The County Courier (festival 2), The W
 | Last 3 days | 15% (90% in total) |
 | On the day (walk-ups) | 10% (100%) |
 
-- Continue jumps to the next email or deadline.
+- Continue moves time to the next day with a new card, a deadline or the gates opening.
 - After day 3, facilities can only be added as emergency units at 1.5 times the usual price.
 - The lineup locks the day before the festival.
