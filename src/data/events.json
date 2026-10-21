@@ -190,7 +190,7 @@
         "bands": 0,
         "reputation": 0,
         "risksFine": true,
-        "effect": "A 25% chance of a council fine of 5% of full-scale ticket revenue."
+        "effect": "The village may complain to the council."
       }
     ]
   }

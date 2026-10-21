@@ -142,8 +142,8 @@ export interface FestivalTimeline {
   /** The lineup locks when days to gates reach this. */
   lineupLock: number;
   stops: TimelineStop[];
-  /** The festival day: scripted events in time order, and when the headliner goes on. */
-  day: { events: ScheduledDayEvent[]; headlinerOn: string };
+  /** The festival day: scripted events in time order, and when the support and headliner go on. */
+  day: { events: ScheduledDayEvent[]; supportOn: string; headlinerOn: string };
 }
 
 export interface SalesWindow {

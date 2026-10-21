@@ -5,7 +5,7 @@ import { foodQueuePeakDemand } from '../core/economy';
 import { defaultTuning } from '../core/tuning';
 import styles from './ui.module.css';
 
-function Meter({ label, value, target }: { label: string; value: number; target: number }) {
+export function Meter({ label, value, target }: { label: string; value: number; target: number }) {
   const met = value >= target;
   return (
     <div className={styles.meter}>

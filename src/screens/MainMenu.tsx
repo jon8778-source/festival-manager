@@ -29,7 +29,7 @@ export function MainMenu() {
           ))}
         </ul>
         <p className={styles.days}>
-          {game ? (game.phase === 'day' ? 'Gates are open!' : `${game.daysToGates} days to gates`) : `One day only · ${festival.capacity} tickets`}
+          {game ? (game.phase === 'prep' ? `${game.daysToGates} days to gates` : game.phase === 'day' ? 'Gates are open!' : 'The festival is over') : `One day only · ${festival.capacity} tickets`}
         </p>
         <div className={styles.flags} aria-hidden="true">
           🎪 🎸 🎤

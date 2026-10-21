@@ -54,3 +54,15 @@ The full list is in section 9 of [PLAN.md](PLAN.md). In short:
 37. **A player walking away** sends no email and cues no Randy line; the "Band walks away" line and emails are for the band running out of patience.
 38. **Festival day** shows a placeholder with the forecast snapshot until step 5. There is no save yet (step 6), so reloading the page starts again.
 39. **New tuning numbers** in `tuning.json`: `decisions.salesSlowEmailThreshold` (0.6) and a `prep` group (counter expiry 3 days, nearly sold out 90%, ticket price slider £10 to £50 in £1 steps, negotiation fee step £10).
+
+## Step 5: festival day (21 October 2026)
+
+40. **The clock** lives in the core: the screen sends `tick` actions with real elapsed seconds (every 250 ms, at most 1 second per tick so a backgrounded tab doesn't skip the day). 12 game hours take 300 real seconds at 1x (`tuning.festivalDay`); 2x halves that.
+41. **The day waits for the player** to tap Open the gates, so it doesn't start running behind Randy's "Gates open tomorrow" email.
+42. **Response time** is the real seconds a decision card was open, counted by the ticks that arrive while the clock is held. It's stored with each choice for the playtest log (step 6).
+43. **Festival 1 timings** are data in `timeline.json`: food queue at 13:00 (only if food can't cover 1.2 x attendees), band running late at 14:30, noise complaint at 20:00, the support act on at 15:00 and the headliner at 21:00.
+44. **Prevented problems:** the sound limiter or the early finish stops the noise complaint, and enough food stops the food queue. Both are recorded in `day.prevented`, shown as chips and in the results, and Randy says his "prevented" line.
+45. **Event card text** for the food queue and the band running late isn't in CONTENT.md, so the cards use a short line built from the event table ("There's a long queue at the food stall…", "Your support act is stuck on the A-road…"). The noise complaint uses Mrs Hartley's email text.
+46. **Randy's "Queue fixed" line** follows option A on the food queue. Option A on any event cues `fixed:<event>`; only the food queue has a line for it in festival 1.
+47. **The star meters** show the live outcome (the plan plus every choice so far) against the targets. Each bar is drawn relative to its target, with the target marker two-thirds of the way along, so the 5% profit target is as readable as the satisfaction targets.
+48. **At midnight** the phase moves to `results`, and a placeholder results screen shows the stars, the figures and each choice with its response time until the newspaper (step 6).

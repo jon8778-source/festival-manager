@@ -5,6 +5,7 @@ import { Lineup } from '../screens/Lineup';
 import { MainMenu } from '../screens/MainMenu';
 import { Negotiation, NegotiationList } from '../screens/Negotiation';
 import { PrepHub } from '../screens/PrepHub';
+import { Results } from '../screens/Results';
 import { Settings } from '../screens/Settings';
 import { Site } from '../screens/Site';
 import { Tickets } from '../screens/Tickets';
@@ -16,6 +17,7 @@ export function App() {
   if (!game || route.name === 'menu') return <MainMenu />;
   // When preparation ends, the festival day takes over from any preparation screen.
   if (game.phase === 'day') return <FestivalDay />;
+  if (game.phase === 'results') return <Results />;
 
   switch (route.name) {
     case 'hub':
