@@ -3,7 +3,7 @@
 ## Context
 The repository has the step 0 scaffold: Vite, React, strict TypeScript, Vitest, the Pages deploy, a placeholder `MainMenu` and `src/core/game.ts`. Milestone 1 (spec §13.1) is a playable festival 1: Randy's welcome, booking three bands through negotiation, placing facilities, setting a ticket price, Continue through 30 preparation days, a live festival day with three decisions, a newspaper review with stars, Replay, save and load, and the playtest log.
 
-This plan was approved on 19 October 2026. Its decisions are also recorded in `docs/DECISIONS.md`. It was updated after approval for the spec and content changes uploaded to main (fee generosity, merch split and the food queue event). Building happens in later sessions, following PROMPTS steps 2 to 7. Each step is one PR, and `npm test` and `npm run build` must pass before each push.
+This plan was approved on 19 October 2026 and updated on 21 October for the spec revision (see section 11). Its decisions are also recorded in `docs/DECISIONS.md`. It was updated after approval for the spec and content changes uploaded to main (fee generosity, merch split and the food queue event). Building happens in later sessions, following PROMPTS steps 2 to 7. Each step is one PR, and `npm test` and `npm run build` must pass before each push.
 
 ## 1. Architecture
 
@@ -77,7 +77,7 @@ Each file has a matching type in `src/core/content.ts`. The JSON is hand-written
 
 | File | Shape |
 | --- | --- |
-| `tuning.json` | Every constant in spec §4 plus the negotiation and game numbers: `multiDayUplift 0.5`, `spendPerHead 0.45`, `lineupCostCoef 0.85`, `lineupExponent 2/3`, `facilitiesCostCoef 0.30`, `facilityOverbuild 1.25`, `unitServes 100`, `overheadShare 0.37`, `advanceTopUp 1.1`, `advanceFee 0.12`, `advanceFee3Stars 0.06`, `repCarry 0.7`, `baseEventPenalty 0.06`, `noiseFineShare 0.05`, `noiseFineChance 0.25`, the attendance and satisfaction weights, `tierGate [0,15,30,50,75]`, `requiredFeeClamp [0.8,1.4]`, `repDivisor 200`, `slotBelowPremium 0.10`, `slotAbovePremium -0.05`, `merchStep 5`, `merchStepFee 0.04` (applied below the merch ask only), `acceptAt 1.0`, `counterAt 0.8`, `roundCostBelow 0.9`, `patience 3`, `moodDropPerBadRound 15`, `hintSpread 0.15`, `hintSpreadKnown 0.08`, `emergingDiscount 0.10`, `emergencyMultiplier 1.5`, `counterExpiryDays 3`, `dayRealSeconds 300`, `priceSlider {min,max,step}`, `moodLabels`, `verdictCloseAt 0.9`. |
+| `tuning.json` | Every constant in spec §4 plus the negotiation, decision and band mood numbers, grouped as `economy`, `attendance`, `satisfaction`, `reputation`, `merchSlotWeights` (per festival), `negotiation`, `decisions` and `bandMood`. Built in step 2; see the file itself for the full list. Game-flow numbers (counter expiry, day length, price slider) are added in the step that uses them. |
 | `bands.json` | `[{id, name, genre, tier, reputation, legacy, hype, monthlyListeners, trend, feeAsk, merchAsk, festivals:[1,2,3], emerging, notes}]` (all 18 bands) |
 | `festivals.json` | `[{id, number, name, capacity, days, fairPrice, startingCash, slots:['opener','support','headliner'], facilityTypes:['toilets','food'], plotCount, targets:{customers, bands, profit}, decisionCount, prepDays, newspaper, startingReputation, draft}]`. Festival 1 is complete; 2 and 3 are `draft: true`. |
 | `facilities.json` | `[{id, name, emoji, servesPerUnit}]` |
@@ -122,7 +122,7 @@ MainMenu (poster) ─Continue planning / New game─► PrepHub ─► Inbox ─
 
 **Config and scripts:** `scripts/build-content.ts`, plus an edit to `package.json` (`content` script).
 
-**src/core:** `random.ts`, `tuning.ts`, `content.ts`, `economy.ts`, `negotiation.ts`, `calendar.ts`, `emails.ts`, `events.ts`, `stars.ts`, `results.ts`, `tutorial.ts`, `game.ts` (replaces the placeholder), `save.ts`, `playtestLog.ts`, `types.ts` (shared ids and unions).
+**src/core:** `random.ts`, `math.ts` (clamp and sum), `tuning.ts`, `content.ts`, `economy.ts`, `negotiation.ts`, `calendar.ts`, `emails.ts`, `events.ts`, `stars.ts`, `results.ts`, `tutorial.ts`, `game.ts` (replaces the placeholder), `save.ts`, `playtestLog.ts`, `types.ts` (shared ids and unions).
 
 **src/data:** `tuning.json`, `bands.json`, `festivals.json`, `facilities.json`, `events.json`, `emails.json`, `lines.json`, `newspaper.json`, `timeline.json`.
 
@@ -144,7 +144,7 @@ MainMenu (poster) ─Continue planning / New game─► PrepHub ─► Inbox ─
 1. **Mud Pies test vector vs the emerging-band rule.** Emerging bands get a 10% discount on the required fee (`emergingDiscount`) and expect one slot higher. £378 × 0.9 × 1.1 = £374, so £380 for the opener is accepted.
 2. **Rejection (score below 0.8)** costs a round and lowers mood. Talks close only when patience runs out. Email 5 is sent when the last round ends in a rejection.
 3. **Fee generosity and L.** L uses the ask at festival reputation (ask × the reputation adjustment). Fee generosity follows the updated spec §4: fee paid ÷ the required fee after the slot, merch and emerging adjustments, so a deal accepted at a score of exactly 1.0 gives 0.5. This replaces the answer given during planning, because the spec uploaded to main now states it explicitly.
-3a. **Merch above the ask** doesn't lower the fee (updated spec §5). Only offers below the band's merch ask move the fee.
+3a. **Merch above the ask** allows 2% less on the fee for every 5 points (spec revised 21 October). The band's share is paid out of real merch sales.
 4. **Ticket sales in milestone 1:** tickets sold = forecast attendance × cumulative curve share. The box office emails show those numbers. Milestone 2 adds price-change timing and the early-headliner pull.
 
 **My proposals** (you can override any of them):
@@ -154,7 +154,7 @@ MainMenu (poster) ─Continue planning / New game─► PrepHub ─► Inbox ─
 7. **Mood** is display only: it starts at 70 and drops by 15 for each offer scoring below 0.9. The spec says mood reaches the festival only through fee generosity, so it has no other effect on the numbers.
 8. **Randy's market-rate hint** is centred on the required fee for the band's expected slot and merch ask (after the emerging discount). The OK, Close and Low verdicts compare each term with what the band wants: fee at 1.0 or more is OK and 0.9 to 1.0 is Close; slot and merch are OK when they meet or beat the band's wish, Close one step short, and Low beyond that.
 9. **Noise complaint** has two options (A and B), unlike the "three options" rule in spec §6. Events support two or three options.
-10. **The food queue event** happens even if the player built plenty of food (it's scripted for the tutorial). Its options follow the updated content: A is a pop-up food van (2% of R), B is a water and snacks point (0.5%, customers -2), and C is do nothing (customers -8). Option A adds no capacity; it applies only the costs and changes in the table.
+10. **The food queue event** triggers only if food capacity is below 1.2 × attendees (spec revised 21 October); otherwise Randy notes there was no queue and it counts as a prevented problem. Options: A is a pop-up food van (3% of R), B is a water and snacks point (0.5%, customers -2), and C is do nothing (customers -8). Option A adds no capacity.
 11. **Best and worst area** for the newspaper: compare each area's margin over its target (satisfaction minus target; profit/spend minus target). If customers are the worst area, the closing line uses "Price" when the ticket price is above perceived value, otherwise "Queues". `{facility}` is the type with the fewest units, and `{band_name}` is the booked band with the lowest fee generosity. The headline variant is picked with the seeded random generator.
 12. **Spending:** the overhead (£4,625) is committed from day 30, and offers or facilities that would take cash below zero are blocked, with a message.
 13. **Ticket price:** the slider runs from £10 to £50 in £1 steps, starting at the fair price (£25). All tickets are charged at the final price; the spec has a single `price` in the income formula.
@@ -162,9 +162,22 @@ MainMenu (poster) ─Continue planning / New game─► PrepHub ─► Inbox ─
 15. **The lineup locks** when days to gates reach 1. Email 7 (emerging band gets in touch) isn't on the festival 1 timeline, so I propose The Mud Pies on day 20. The tutorial "Targets panel" is the targets row on PrepHub, and "Budget screen" means Finances.
 16. **Replay** resets to day 30 with a new seed derived from the old one, increments `attempt` and logs `replay`. The festival 1 Next festival button shows "Coming soon".
 17. **Hype** has no effect on the numbers in milestone 1 (it isn't in any formula). The headliner announcement's "small hype boost" is display only until milestone 4.
-18. **"Base event penalty"** in the tuning table is the constant -0.06 in the customer formula, applied every festival. I keep its name but it doesn't depend on events.
+18. **No base event penalty.** The spec revision removed the flat -0.06 from customer satisfaction; only the event options chosen change it.
 
 ## 10. Verification
 - `npm test`: the economy matches every §12 figure within rounding (the advance vector included). The negotiation results match the three §5 vectors. The full scripted playthrough reaches results with the same stars from the same seed, and replay resets correctly. The save round-trips.
 - `npm run build` passes, and the CI deploy goes green.
 - Manual playthrough in Chromium at 360×740 and 820×1180 (Playwright screenshots). On the playtest link: new game, book three bands, place facilities, set a price, Continue to day 0, make the three decisions, read the review, Replay. Then reload mid-preparation to check the autosave, and export, import and download the log from Settings.
+
+## 11. Spec revision of 21 October
+
+The spec and content uploaded to main on 21 October change the plan as follows.
+
+- **Economy:** overhead is 0.35 × R. Bands get their merch split of real merch income (17% of Pt per head), weighted by slot (festival 1: headliner 0.5, support 0.3, opener 0.2), and the payout is part of spend. The section 12 test vectors were updated to match.
+- **Preparation decisions:** the sound limiter (day 20, always) and slow sales (day 14, only if forecast attendance is below 80%) arrive as inbox emails with the same three-option card as the festival day. They're resolved by `events.resolveOption`, built in step 2. Step 3 adds them to `events.json` and `emails.json` (emails 22 and 23), and step 4 wires them into the inbox.
+- **Prevented problems:** a sound limiter or early finish stops the noise complaint, and enough food skips the food queue. Both are recorded as successes for the results and the newspaper's new success line.
+- **Live forecast:** a "Forecast before events" panel on PrepHub (compact on Lineup, Site, Tickets and Finances) uses `economy.evaluateFestival` with no events. It shows attendance, income, spend, profit, both satisfactions, the stars the plan would earn, and the queue risk. Gates opening store a snapshot. New component in step 4: `ForecastPanel`.
+- **Results:** forecast against actual, up to three causes plus one thing that went well, and cash shown as a shortfall when negative. Built in step 6.
+- **Save:** must also hold the random seed and any pending decision, so loading never rerolls an outcome. The game state already holds the generator state; step 6 adds the pending decision.
+- **Accessibility basics:** readable text, contrast, never colour alone, a reduced-motion setting in Settings, and 44px touch targets.
+
