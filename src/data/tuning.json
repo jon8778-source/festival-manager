@@ -125,5 +125,8 @@
     "endHour": 24,
     "realSecondsAtNormalSpeed": 300,
     "fastSpeed": 2
+  },
+  "playtestLog": {
+    "maxRecords": 5000
   }
 }

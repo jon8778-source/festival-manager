@@ -99,6 +99,10 @@ export interface Tuning {
     realSecondsAtNormalSpeed: number;
     fastSpeed: number;
   };
+  playtestLog: {
+    /** The oldest records are dropped past this many. */
+    maxRecords: number;
+  };
 }
 
 export const defaultTuning: Tuning = tuningJson;

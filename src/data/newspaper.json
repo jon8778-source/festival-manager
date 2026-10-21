@@ -1,0 +1,31 @@
+{
+  "papers": { "1": "The Village Gazette", "2": "The County Courier", "3": "The Weekend Reporter" },
+  "headlines": {
+    "3": ["{headliner} bring the house down at {festival}", "{festival} a triumph from first band to last"],
+    "2": ["{festival} delivers, mostly", "A good day out at {festival}, despite {weakest_issue}"],
+    "1": ["Mixed reviews for {festival}", "{weakest_issue_cap} spoil the mood at {festival}"],
+    "0": ["{festival} a washout", "Questions for organisers after {festival}"]
+  },
+  "weakestIssue": { "queues": "long queues", "price": "steep prices", "bands": "unhappy acts", "money": "money worries" },
+  "opening": {
+    "customers": "A cracking day out: well run, well fed and full of smiles.",
+    "bands": "The acts looked delighted to be there, and it showed on stage.",
+    "profit": "Organisers will be pleased with the takings, and the crowd got their money's worth."
+  },
+  "closing": {
+    "queues": "The only grumble: the queue for {facility}.",
+    "price": "At £{price} a ticket, not everyone was smiling.",
+    "bands": "{band_name} looked like they'd rather be elsewhere.",
+    "money": "Word is the organisers spent more than they took."
+  },
+  "events": {
+    "noiseFine": "The council has since fined organisers £{fine} over noise."
+  },
+  "success": {
+    "soldOut": "Every ticket went, and the field was full by teatime.",
+    "noQueue": "Plenty of food stalls meant no one queued long for lunch.",
+    "limiter": "A sound limiter kept the peace with the neighbours, and the music never stopped.",
+    "headlinerDelighted": "{headliner} looked thrilled to be there, and played like it."
+  },
+  "bandMood": { "delighted": "Delighted", "happy": "Happy", "grumbling": "Grumbling", "furious": "Furious" }
+}

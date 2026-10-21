@@ -51,7 +51,7 @@ import {
   type Slot,
   type Talks,
 } from './negotiation';
-import { createRng, type RngState } from './random';
+import { createRng, nextInt, type RngState } from './random';
 import { computeStars, type Stars } from './stars';
 import { cueLines, dismissLine, newTutorial, skipTutorial, type TutorialState } from './tutorial';
 import { defaultTuning, type Tuning } from './tuning';
@@ -163,7 +163,8 @@ export type GameAction =
   | { type: 'openGates' }
   | { type: 'tick'; realSeconds: number }
   | { type: 'setSpeed'; speed: number }
-  | { type: 'chooseOption'; option: OptionKey };
+  | { type: 'chooseOption'; option: OptionKey }
+  | { type: 'replay' };
 
 // ---------------------------------------------------------------- derived values
 
@@ -786,6 +787,19 @@ function chooseOption(state: GameState, c: Content, t: Tuning, key: OptionKey): 
   return key === 'A' ? cue(s, c, `fixed:${active.eventId}`) : s;
 }
 
+// ---------------------------------------------------------------- replay
+
+/**
+ * Replay the festival from its start with everything reset (cash, reputation, bookings). The new
+ * seed comes from the old generator, so a replay is still deterministic. Randy doesn't repeat
+ * lines the player has already seen.
+ */
+export function replayFestival(state: GameState, c: Content = defaultContent, t: Tuning = defaultTuning): GameState {
+  const { value: seed } = nextInt(state.rng, 1, 0x7fffffff);
+  const fresh = newGame(seed, c, t, state.festivalId);
+  return { ...fresh, attempt: state.attempt + 1, tutorial: { ...state.tutorial, queue: [] } };
+}
+
 // ---------------------------------------------------------------- reducer
 
 export function reduce(state: GameState, action: GameAction, c: Content = defaultContent, t: Tuning = defaultTuning): GameState {
@@ -825,6 +839,8 @@ export function reduce(state: GameState, action: GameAction, c: Content = defaul
       return setSpeed(s, t, action.speed);
     case 'chooseOption':
       return chooseOption(s, c, t, action.option);
+    case 'replay':
+      return replayFestival(s, c, t);
   }
 }
 
