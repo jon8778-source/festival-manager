@@ -1,0 +1,618 @@
+[
+  {
+    "id": "welcome",
+    "number": 1,
+    "from": "Randy Popping",
+    "when": "Preparation starts",
+    "subject": "Welcome to the Village Green",
+    "body": "Right then. You've {days_to_gates} days, £{cash} and a field. Book a headliner first; everything else follows.",
+    "note": null,
+    "buttons": [
+      {
+        "label": "Open lineup",
+        "action": {
+          "type": "screen",
+          "screen": "lineup"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "moment",
+      "moment": "welcome"
+    },
+    "festivals": [
+      1
+    ]
+  },
+  {
+    "id": "no-headliner",
+    "number": 2,
+    "from": "Randy Popping",
+    "when": "No headliner with 10 days to go",
+    "subject": "Still no headliner",
+    "body": "Bands won't sign for a festival without a name at the top. Sort the headliner before the rest.",
+    "note": null,
+    "buttons": [
+      {
+        "label": "Open lineup",
+        "action": {
+          "type": "screen",
+          "screen": "lineup"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "moment",
+      "moment": "no-headliner-reminder"
+    },
+    "festivals": null
+  },
+  {
+    "id": "deal-accepted",
+    "number": 3,
+    "from": "{band_name}'s agent",
+    "when": "Offer accepted",
+    "subject": "{band_name}: you've got a deal",
+    "body": "Happy to confirm {band_name} for the {slot} slot at £{fee}, with {merch_pct}% of the merch. See you on the day.",
+    "note": null,
+    "buttons": [
+      {
+        "label": "View contract",
+        "action": {
+          "type": "screen",
+          "screen": "lineup"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "action",
+      "action": "offer-accepted"
+    },
+    "festivals": null
+  },
+  {
+    "id": "counter-offer",
+    "number": 4,
+    "from": "{band_name}'s agent",
+    "when": "Band counters",
+    "subject": "{band_name}: counter-offer",
+    "body": "Thanks for the offer. {band_name} would do it for £{counter_fee}, the {counter_slot} slot and {counter_merch}% of the merch. Let us know within {days_left} days.",
+    "note": null,
+    "buttons": [
+      {
+        "label": "Accept",
+        "action": {
+          "type": "game",
+          "action": "acceptCounter"
+        }
+      },
+      {
+        "label": "Negotiate",
+        "action": {
+          "type": "screen",
+          "screen": "negotiation"
+        }
+      },
+      {
+        "label": "Walk away",
+        "action": {
+          "type": "game",
+          "action": "walkAway"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "action",
+      "action": "offer-countered"
+    },
+    "festivals": null
+  },
+  {
+    "id": "offer-rejected",
+    "number": 5,
+    "from": "{band_name}'s agent",
+    "when": "Offer rejected",
+    "subject": "{band_name}: not this time",
+    "body": "We're going to pass on this one. Do come back to us next year.",
+    "note": null,
+    "buttons": [
+      {
+        "label": "Find another act",
+        "action": {
+          "type": "screen",
+          "screen": "lineup"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "action",
+      "action": "offer-rejected"
+    },
+    "festivals": null
+  },
+  {
+    "id": "band-moved-on",
+    "number": 6,
+    "from": "{band_name}'s agent",
+    "when": "Patience runs out",
+    "subject": "{band_name} has moved on",
+    "body": "We've gone round a few times now, and the band has taken another date. No hard feelings.",
+    "note": null,
+    "buttons": [
+      {
+        "label": "Find another act",
+        "action": {
+          "type": "screen",
+          "screen": "lineup"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "action",
+      "action": "patience-ran-out"
+    },
+    "festivals": null
+  },
+  {
+    "id": "emerging-band",
+    "number": 7,
+    "from": "{band_name}'s agent",
+    "when": "Emerging band gets in touch",
+    "subject": "{band_name} would love a slot",
+    "body": "{band_name} are building a following: {listeners} monthly listeners and rising. They'd play an early slot for a modest fee.",
+    "note": null,
+    "buttons": [
+      {
+        "label": "Make an offer",
+        "action": {
+          "type": "screen",
+          "screen": "negotiation"
+        }
+      },
+      {
+        "label": "Not now",
+        "action": {
+          "type": "game",
+          "action": "dismiss"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "condition",
+      "condition": "emerging-band-approach"
+    },
+    "festivals": null
+  },
+  {
+    "id": "tickets-live",
+    "number": 8,
+    "from": "Box office",
+    "when": "Tickets go on sale",
+    "subject": "Tickets are live",
+    "body": "Tickets went on sale at £{price}. We'll send you a sales update each week.",
+    "note": null,
+    "buttons": [
+      {
+        "label": "Change price",
+        "action": {
+          "type": "screen",
+          "screen": "tickets"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "moment",
+      "moment": "tickets-on-sale"
+    },
+    "festivals": null
+  },
+  {
+    "id": "sales-update",
+    "number": 9,
+    "from": "Box office",
+    "when": "On the box office schedule (see the timeline)",
+    "subject": "Sales update: {sold_pct}% sold",
+    "body": "{tickets_sold} of {capacity} tickets sold with {days_to_gates} days to go. At this rate we expect about {forecast} people on the day.",
+    "note": null,
+    "buttons": [
+      {
+        "label": "View tickets",
+        "action": {
+          "type": "screen",
+          "screen": "tickets"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "moment",
+      "moment": "sales-update"
+    },
+    "festivals": null
+  },
+  {
+    "id": "sales-slow",
+    "number": 10,
+    "from": "Box office",
+    "when": "Forecast below 60% of capacity",
+    "subject": "Sales are slow",
+    "body": "We're heading for about {forecast} people, {forecast_pct}% of the field. A bigger name on the bill or a lower price usually helps.",
+    "note": null,
+    "buttons": [
+      {
+        "label": "View lineup",
+        "action": {
+          "type": "screen",
+          "screen": "lineup"
+        }
+      },
+      {
+        "label": "Change price",
+        "action": {
+          "type": "screen",
+          "screen": "tickets"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "condition",
+      "condition": "forecast-below-60"
+    },
+    "festivals": null
+  },
+  {
+    "id": "nearly-sold-out",
+    "number": 11,
+    "from": "Box office",
+    "when": "Over 90% sold",
+    "subject": "Nearly sold out",
+    "body": "Only {remaining} tickets left. Make sure your toilets and food can cope with a full field.",
+    "note": null,
+    "buttons": [
+      {
+        "label": "Open site",
+        "action": {
+          "type": "screen",
+          "screen": "site"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "condition",
+      "condition": "over-90-sold"
+    },
+    "festivals": null
+  },
+  {
+    "id": "facilities-booked",
+    "number": 12,
+    "from": "Field & Flush Hire",
+    "when": "Facilities booked",
+    "subject": "Booking confirmed: {units} {facility}",
+    "body": "We'll deliver {units} {facility} on the morning of the festival. Total: £{cost}.",
+    "note": null,
+    "buttons": [
+      {
+        "label": "View site",
+        "action": {
+          "type": "screen",
+          "screen": "site"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "action",
+      "action": "facilities-booked"
+    },
+    "festivals": null
+  },
+  {
+    "id": "mind-the-queues",
+    "number": 13,
+    "from": "Randy Popping",
+    "when": "Ticket sales exceed facility capacity",
+    "subject": "Mind the queues",
+    "body": "You've sold {tickets_sold} tickets and have toilets for {capacity_served}. I've seen queues start fights over less.",
+    "note": null,
+    "buttons": [
+      {
+        "label": "Open site",
+        "action": {
+          "type": "screen",
+          "screen": "site"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "condition",
+      "condition": "sales-exceed-facilities"
+    },
+    "festivals": null
+  },
+  {
+    "id": "headliner-announced",
+    "number": 14,
+    "from": "The Village Gazette",
+    "when": "Headliner booked",
+    "subject": "Village Green lands {band_name}",
+    "body": "{band_name} will headline this year's Village Green, organisers have confirmed. Tickets from £{price}.",
+    "note": "gives a small hype boost",
+    "buttons": [
+      {
+        "label": "Read",
+        "action": {
+          "type": "game",
+          "action": "dismiss"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "action",
+      "action": "headliner-booked"
+    },
+    "festivals": [
+      1
+    ]
+  },
+  {
+    "id": "empty-slot",
+    "number": 15,
+    "from": "Randy Popping",
+    "when": "A slot still empty with 3 days to go",
+    "subject": "You've an empty slot",
+    "body": "Your {slot} slot is still empty. An empty stage makes for a quiet field.",
+    "note": null,
+    "buttons": [
+      {
+        "label": "Open lineup",
+        "action": {
+          "type": "screen",
+          "screen": "lineup"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "moment",
+      "moment": "empty-slot-reminder"
+    },
+    "festivals": null
+  },
+  {
+    "id": "gates-tomorrow",
+    "number": 16,
+    "from": "Randy Popping",
+    "when": "Day before the festival",
+    "subject": "Gates open tomorrow",
+    "body": "Last chance to check the site. Once the gates open, it's too late to add a toilet.",
+    "note": null,
+    "buttons": [
+      {
+        "label": "Open site",
+        "action": {
+          "type": "screen",
+          "screen": "site"
+        }
+      },
+      {
+        "label": "Start festival",
+        "action": {
+          "type": "game",
+          "action": "startFestival"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "moment",
+      "moment": "gates-tomorrow"
+    },
+    "festivals": null
+  },
+  {
+    "id": "review",
+    "number": 17,
+    "from": "The Village Gazette",
+    "when": "After the festival",
+    "subject": "Our review of the Village Green",
+    "body": null,
+    "note": "The newspaper review, which opens the results screen.",
+    "buttons": [
+      {
+        "label": "Read the review",
+        "action": {
+          "type": "screen",
+          "screen": "results"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "action",
+      "action": "festival-finished"
+    },
+    "festivals": [
+      1
+    ]
+  },
+  {
+    "id": "noise-limits",
+    "number": 18,
+    "from": "Village Green Trust (the venue)",
+    "when": "After the headliner is booked",
+    "subject": "Noise limits for the day",
+    "body": "A reminder that music must stay under the agreed limit and finish by 11pm. Complaints from the village go to the council, who may fine you.",
+    "note": null,
+    "buttons": [
+      {
+        "label": "Got it",
+        "action": {
+          "type": "game",
+          "action": "dismiss"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "action",
+      "action": "headliner-booked"
+    },
+    "festivals": [
+      1
+    ]
+  },
+  {
+    "id": "noise-complaint",
+    "number": 19,
+    "from": "Mrs Hartley, Church Lane (local resident)",
+    "when": "During the festival (a decision)",
+    "subject": "Noise complaint",
+    "body": "The music is rattling my windows and the dog won't settle. Please turn it down.",
+    "note": "Turn it down: customers -3, bands -5. Ignore it: 25% chance of a fine of 5% of full-scale ticket revenue (about £625 at festival 1).",
+    "buttons": [
+      {
+        "label": "Turn it down",
+        "action": {
+          "type": "option",
+          "option": "A"
+        }
+      },
+      {
+        "label": "Ignore it",
+        "action": {
+          "type": "option",
+          "option": "B"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "event",
+      "eventId": "noise-complaint"
+    },
+    "festivals": null
+  },
+  {
+    "id": "weather-forecast",
+    "number": 20,
+    "from": "Fieldcast Weather",
+    "when": "5 days before festival 2",
+    "subject": "Weekend forecast: {forecast}",
+    "body": "Showers likely on {day} afternoon ({rain_chance}% chance). Worth thinking about cover.",
+    "note": null,
+    "buttons": [
+      {
+        "label": "Open site",
+        "action": {
+          "type": "screen",
+          "screen": "site"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "moment",
+      "moment": "weather-forecast"
+    },
+    "festivals": [
+      2
+    ]
+  },
+  {
+    "id": "sound-limiter",
+    "number": 22,
+    "from": "Village Green Trust (the venue)",
+    "when": "Sound limiter decision (see 3b)",
+    "subject": "Keeping the village happy",
+    "body": "We had complaints last year about the music. You can install a sound limiter for £{cost}, agree to finish at 10:30pm, or take your chances.",
+    "note": null,
+    "buttons": [
+      {
+        "label": "Install limiter",
+        "action": {
+          "type": "option",
+          "option": "A"
+        }
+      },
+      {
+        "label": "Finish at 10:30",
+        "action": {
+          "type": "option",
+          "option": "B"
+        }
+      },
+      {
+        "label": "Decline",
+        "action": {
+          "type": "option",
+          "option": "C"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "event",
+      "eventId": "sound-limiter"
+    },
+    "festivals": null
+  },
+  {
+    "id": "slow-sales",
+    "number": 23,
+    "from": "Box office",
+    "when": "Slow-sales check (see 3b)",
+    "subject": "Sales need a push",
+    "body": "We're forecasting {forecast} people, {forecast_pct}% of the field. We can drop the price by £{price_cut}, put posters up around the area for £{poster_cost}, or wait and see.",
+    "note": null,
+    "buttons": [
+      {
+        "label": "Cut price",
+        "action": {
+          "type": "option",
+          "option": "A"
+        }
+      },
+      {
+        "label": "Posters",
+        "action": {
+          "type": "option",
+          "option": "B"
+        }
+      },
+      {
+        "label": "Wait",
+        "action": {
+          "type": "option",
+          "option": "C"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "event",
+      "eventId": "slow-sales"
+    },
+    "festivals": null
+  },
+  {
+    "id": "band-flying",
+    "number": 21,
+    "from": "{band_name}'s agent",
+    "when": "After a festival, if an emerging act had a good slot",
+    "subject": "{band_name} are flying",
+    "body": "Since your festival, {band_name} have gone from {old_listeners} to {new_listeners} monthly listeners. They'd love to come back.",
+    "note": null,
+    "buttons": [
+      {
+        "label": "Make an offer",
+        "action": {
+          "type": "screen",
+          "screen": "negotiation"
+        }
+      },
+      {
+        "label": "Not now",
+        "action": {
+          "type": "game",
+          "action": "dismiss"
+        }
+      }
+    ],
+    "trigger": {
+      "type": "action",
+      "action": "emerging-band-grew"
+    },
+    "festivals": null
+  }
+]

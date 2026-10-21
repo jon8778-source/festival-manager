@@ -1,0 +1,273 @@
+{
+  "tutorial": [
+    {
+      "id": "game-starts",
+      "step": "1. Welcome",
+      "when": "Game starts",
+      "text": "Randy Popping. Forty years of muddy fields and missing headliners. Let's get you through your first festival without either."
+    },
+    {
+      "id": "budget-screen-opens",
+      "step": "1. Welcome",
+      "when": "Budget screen opens",
+      "text": "You've got £{cash} to play with. Bands, toilets, food and the field all come out of that, so don't blow it on the headliner."
+    },
+    {
+      "id": "targets-panel",
+      "step": "1. Welcome",
+      "when": "Targets panel",
+      "text": "Three stars to chase: make a profit, keep the crowd happy, keep the bands happy. Get two and you're through to next year."
+    },
+    {
+      "id": "lineup-screen-opens",
+      "step": "2. Lineup",
+      "when": "Lineup screen opens",
+      "text": "Three slots: opener, support and headliner. Start at the top. It's the headliner that sells the tickets."
+    },
+    {
+      "id": "first-negotiation-opens",
+      "step": "2. Lineup",
+      "when": "First negotiation opens",
+      "text": "This is {band_name}. Acts like this usually go for £{rate_low} to £{rate_high}. Make them an offer and see what comes back."
+    },
+    {
+      "id": "offer-table",
+      "step": "2. Lineup",
+      "when": "Offer table",
+      "text": "You've three things to play with: the fee, where they sit on the bill, and their cut of the merch."
+    },
+    {
+      "id": "band-counters",
+      "step": "2. Lineup",
+      "when": "Band counters",
+      "text": "A counter. That's a good sign: they want the gig. Meet them part way, or offer a bigger merch cut. Just remember their cut comes out of what you sell."
+    },
+    {
+      "id": "deal-accepted",
+      "step": "2. Lineup",
+      "when": "Deal accepted",
+      "text": "Signed. Remember what you paid. A happy band plays a better set."
+    },
+    {
+      "id": "band-walks-away",
+      "step": "2. Lineup",
+      "when": "Band walks away",
+      "text": "Ah, they've walked. No harm done. Try another act."
+    },
+    {
+      "id": "headliner-booked",
+      "step": "2. Lineup",
+      "when": "Headliner booked",
+      "text": "Now the opener and support. Cheaper acts, and one of them might be the next big thing."
+    },
+    {
+      "id": "site-map-opens",
+      "step": "3. Build",
+      "when": "Site map opens",
+      "text": "Now the field. Stage first, then toilets and food. 500 people need somewhere to go and something to eat, in that order."
+    },
+    {
+      "id": "forecast-panel-first-shown",
+      "step": "3. Build",
+      "when": "Forecast panel first shown",
+      "text": "This is your forecast. Change anything and it updates. It's a guess, not a promise, but it's a good guess."
+    },
+    {
+      "id": "sound-limiter-email",
+      "step": "3. Build",
+      "when": "Sound limiter email",
+      "text": "A limiter's cheap insurance. Village folk complain about noise; they always have."
+    },
+    {
+      "id": "ticket-price",
+      "step": "3. Build",
+      "when": "Ticket price",
+      "text": "A fair price is £{fair_price}. Go above it and fewer come; go below it and the profit gets thin."
+    },
+    {
+      "id": "gates-open",
+      "step": "4. Run",
+      "when": "Gates open",
+      "text": "Gates are open. Keep an eye on the bars at the top: the crowd, the bands and your three targets."
+    },
+    {
+      "id": "food-queue",
+      "step": "4. Run",
+      "when": "Food queue (scripted, midday)",
+      "text": "There's a queue at the food stall. Get a food van in before tempers fray."
+    },
+    {
+      "id": "queue-fixed",
+      "step": "4. Run",
+      "when": "Queue fixed",
+      "text": "Good. Problems only get bigger the longer you leave them."
+    },
+    {
+      "id": "no-queue",
+      "step": "4. Run",
+      "when": "No queue (enough food built)",
+      "text": "No queue at the food stalls. That's what planning buys you."
+    },
+    {
+      "id": "band-running-late",
+      "step": "4. Run",
+      "when": "Band running late (scripted)",
+      "text": "Your support act is stuck on the A-road. Stretch the opener's set, or fill the gap with music over the speakers."
+    },
+    {
+      "id": "complaint-prevented",
+      "step": "4. Run",
+      "when": "Complaint prevented (limiter or early finish)",
+      "text": "Not a peep from the village. That limiter's earned its keep."
+    },
+    {
+      "id": "noise-complaint",
+      "step": "4. Run",
+      "when": "Noise complaint",
+      "text": "Someone's complained about the noise. Turn it down and the crowd grumbles; ignore it and you might get fined."
+    },
+    {
+      "id": "headliner-goes-on",
+      "step": "4. Run",
+      "when": "Headliner goes on",
+      "text": "That's your headliner on. This is the bit everyone remembers."
+    },
+    {
+      "id": "results-screen",
+      "step": "5. Results",
+      "when": "Results screen",
+      "text": "Here's how you did: {stars} stars out of three."
+    },
+    {
+      "id": "passed",
+      "step": "5. Results",
+      "when": "Passed",
+      "text": "Not bad at all. Next year they'll give you a bigger field and bigger names."
+    },
+    {
+      "id": "failed",
+      "step": "5. Results",
+      "when": "Failed",
+      "text": "Not this time. Have another go, and I'll tell you what went wrong."
+    },
+    {
+      "id": "skip-button",
+      "step": "Any",
+      "when": "Skip button",
+      "text": "Want to skip the chat? Go on, I won't be offended."
+    }
+  ],
+  "festival2": [
+    {
+      "id": "festival-opens",
+      "step": null,
+      "when": "Festival opens",
+      "text": "The Local Field. Fifteen hundred people this time, so three times the toilets and three times the trouble."
+    },
+    {
+      "id": "budget-screen",
+      "step": null,
+      "when": "Budget screen (promoter advance)",
+      "text": "Your cash won't stretch to a field this size, so the promoter's lending you £{advance}. It's paid back after the festival with a {fee}% fee, or {fee3}% if you earn all three stars."
+    },
+    {
+      "id": "lineup-screen-reputation",
+      "step": null,
+      "when": "Lineup screen (reputation)",
+      "text": "Your reputation is {reputation} now. Some bands won't return your calls until it's higher. That's show business."
+    },
+    {
+      "id": "lineup-screen-slots",
+      "step": null,
+      "when": "Lineup screen (slots)",
+      "text": "Four slots this time: an opener, two supports and a headliner."
+    },
+    {
+      "id": "build-screen",
+      "step": null,
+      "when": "Build screen (bar)",
+      "text": "You've got a bar. Beer's the best margin in the business, but a queue at the bar sours a crowd as fast as any other."
+    },
+    {
+      "id": "light-rain-event",
+      "step": null,
+      "when": "Light rain event",
+      "text": "Rain's coming in. Ponchos or the covered area, your call. Do nothing and the crowd will tell you about it."
+    },
+    {
+      "id": "passed",
+      "step": null,
+      "when": "Passed",
+      "text": "Two festivals in. People are starting to talk about you, mostly kindly."
+    }
+  ],
+  "festival3": [
+    {
+      "id": "festival-opens",
+      "step": null,
+      "when": "Festival opens",
+      "text": "Two Stages. Three thousand people and twice the bands. It gets complicated from here."
+    },
+    {
+      "id": "lineup-screen-second-stage",
+      "step": null,
+      "when": "Lineup screen (second stage)",
+      "text": "The second stage is for the smaller acts and the ones on their way up. Give an emerging band a slot here and watch them grow."
+    },
+    {
+      "id": "lineup-screen-clashes",
+      "step": null,
+      "when": "Lineup screen (clashes)",
+      "text": "Watch your set times. Put two acts people love on at once and half the crowd goes home grumpy."
+    },
+    {
+      "id": "lineup-screen-sound-bleed",
+      "step": null,
+      "when": "Lineup screen (sound bleed)",
+      "text": "Two loud acts at the same time will drown each other out. Space them, or keep the quiet ones away from the loud ones."
+    },
+    {
+      "id": "band-pool",
+      "step": null,
+      "when": "Band pool (stretch headliner)",
+      "text": "The Last Heatwave won't play a festival with reputation under 75. You're at {reputation}. Something to aim for."
+    },
+    {
+      "id": "band-pulls-out-event",
+      "step": null,
+      "when": "Band pulls out event",
+      "text": "A band's pulled out. It happens. Book a replacement, but expect to pay over the odds at this short notice."
+    },
+    {
+      "id": "toilets-out-of-order-event",
+      "step": null,
+      "when": "Toilets out of order event",
+      "text": "The toilets are out of order. Of course they are. Repair them or bring in a temporary block, and quickly."
+    },
+    {
+      "id": "passed",
+      "step": null,
+      "when": "Passed (end of the MVP)",
+      "text": "Three festivals done. That's more than most manage. Next year, they'll want you to keep them overnight."
+    }
+  ],
+  "events": [
+    {
+      "id": "stage-equipment-breaks",
+      "step": null,
+      "when": "Stage equipment breaks (festival 2)",
+      "text": "The bass amp's given up. Hire a replacement or let them play on without it. Bands remember who fixed things."
+    },
+    {
+      "id": "headliner-storms-off",
+      "step": null,
+      "when": "Headliner storms off (festival 3)",
+      "text": "Your headliner's stormed off stage. Talk them round, or bring the support act back on. Just don't leave the stage empty."
+    }
+  ],
+  "tips": {
+    "profit": "You spent more than the day brought in. Next time, trim the lineup or nudge the ticket price.",
+    "customers": "The crowd went home grumbling. Look at your queues and your ticket price first.",
+    "bands": "The bands weren't happy. Pay closer to their asking price, and give them the slot they want."
+  }
+}

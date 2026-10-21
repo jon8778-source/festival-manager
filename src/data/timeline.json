@@ -1,0 +1,199 @@
+{
+  "festivals": [
+    {
+      "festival": 1,
+      "prepDays": 30,
+      "moments": [
+        {
+          "id": "welcome",
+          "days": [
+            30
+          ],
+          "text": "Day 30: Randy's welcome"
+        },
+        {
+          "id": "tickets-on-sale",
+          "days": [
+            26
+          ],
+          "text": "Day 26: tickets on sale"
+        },
+        {
+          "id": "sales-update",
+          "days": [
+            16,
+            14,
+            7,
+            3
+          ],
+          "text": "Sales updates on days 16, 14, 7 and 3"
+        },
+        {
+          "id": "sound-limiter",
+          "days": [
+            20
+          ],
+          "text": "Day 20: sound limiter decision"
+        },
+        {
+          "id": "slow-sales-check",
+          "days": [
+            14
+          ],
+          "text": "Day 14: slow-sales check (decision only if forecast attendance is below 80%)"
+        },
+        {
+          "id": "no-headliner-reminder",
+          "days": [
+            10
+          ],
+          "text": "Day 10: reminder if there's no headliner"
+        },
+        {
+          "id": "empty-slot-reminder",
+          "days": [
+            3
+          ],
+          "text": "Day 3: reminder for any empty slot, and the last day to book facilities at the normal price"
+        },
+        {
+          "id": "facility-deadline",
+          "days": [
+            3
+          ],
+          "text": "Day 3: reminder for any empty slot, and the last day to book facilities at the normal price"
+        },
+        {
+          "id": "gates-tomorrow",
+          "days": [
+            1
+          ],
+          "text": "Day 1: \"Gates open tomorrow\""
+        },
+        {
+          "id": "festival-day",
+          "days": [
+            0
+          ],
+          "text": "Day 0: festival day"
+        }
+      ],
+      "inheritsFrom": null,
+      "text": "Day 30: Randy's welcome. Day 26: tickets on sale. Sales updates on days 16, 14, 7 and 3. Day 20: sound limiter decision. Day 14: slow-sales check (decision only if forecast attendance is below 80%). Day 10: reminder if there's no headliner. Day 3: reminder for any empty slot, and the last day to book facilities at the normal price. Day 1: \"Gates open tomorrow\". Day 0: festival day."
+    },
+    {
+      "festival": 2,
+      "prepDays": 60,
+      "moments": [
+        {
+          "id": "promoter-advance",
+          "days": [
+            60
+          ],
+          "text": "Day 60: promoter advance offer"
+        },
+        {
+          "id": "tickets-on-sale",
+          "days": [
+            50
+          ],
+          "text": "Day 50: tickets on sale"
+        },
+        {
+          "id": "lineup-announcement",
+          "days": [
+            40
+          ],
+          "text": "Lineup announcement once the headliner is signed (aim for around day 40)"
+        },
+        {
+          "id": "sales-update",
+          "days": [],
+          "text": "Sales updates every 14 days, then weekly for the last 2 weeks"
+        },
+        {
+          "id": "weather-forecast",
+          "days": [
+            5
+          ],
+          "text": "Day 5: weather forecast"
+        }
+      ],
+      "inheritsFrom": 1,
+      "text": "Day 60: promoter advance offer. Day 50: tickets on sale. Lineup announcement once the headliner is signed (aim for around day 40). Sales updates every 14 days, then weekly for the last 2 weeks. Day 5: weather forecast. Otherwise as festival 1."
+    },
+    {
+      "festival": 3,
+      "prepDays": 60,
+      "moments": [
+        {
+          "id": "second-stage-unlocked",
+          "days": [
+            60
+          ],
+          "text": "Day 60: second stage unlocked"
+        },
+        {
+          "id": "tickets-on-sale",
+          "days": [
+            50
+          ],
+          "text": "Day 50: tickets on sale"
+        },
+        {
+          "id": "lineup-announcement",
+          "days": [
+            40
+          ],
+          "text": "Lineup announcement once the headliner is signed (aim for around day 40)"
+        },
+        {
+          "id": "set-times-locked",
+          "days": [
+            10
+          ],
+          "text": "Day 10: set times locked, with clashes and sound bleed checked"
+        }
+      ],
+      "inheritsFrom": 2,
+      "text": "Day 60: second stage unlocked. Day 50: tickets on sale. Lineup announcement once the headliner is signed (aim for around day 40). Day 10: set times locked, with clashes and sound bleed checked. Otherwise as festival 2."
+    }
+  ],
+  "salesCurve": [
+    {
+      "label": "On sale to 14 days to go",
+      "from": null,
+      "to": 14,
+      "share": 0.2
+    },
+    {
+      "label": "14 to 7 days",
+      "from": 14,
+      "to": 7,
+      "share": 0.25
+    },
+    {
+      "label": "7 to 3 days",
+      "from": 7,
+      "to": 3,
+      "share": 0.3
+    },
+    {
+      "label": "Last 3 days",
+      "from": 3,
+      "to": 0,
+      "share": 0.15
+    },
+    {
+      "label": "On the day (walk-ups)",
+      "from": 0,
+      "to": 0,
+      "share": 0.1
+    }
+  ],
+  "rules": [
+    "Continue jumps to the next email or deadline.",
+    "After day 3, facilities can only be added as emergency units at 1.5 times the usual price.",
+    "The lineup locks the day before the festival."
+  ]
+}
