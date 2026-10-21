@@ -38,3 +38,19 @@ The full list is in section 9 of [PLAN.md](PLAN.md). In short:
 25. **The noise fine's** chance and size come from tuning.json; the event option only says it risks the fine (`risksFine`).
 26. **Spec note:** section 4 says a £6,600 lineup gives L of about 0.75, but the formula gives 0.73 (£6,900 gives 0.75, as in section 12). The code follows the formula.
 
+
+## Step 4: preparation phase (21 October 2026)
+
+27. **Content data** for this step was written by hand into `src/data` (all 18 bands, festival 1, facilities, the two preparation decisions, the festival 1 emails, Randy's festival 1 tutorial lines and the festival 1 timeline). Step 3 (the `npm run content` generator and festivals 2 and 3 as drafts) hasn't been built yet; when it is, it should produce these same shapes.
+28. **The live forecast panel and the two preparation decision emails** are included, as the approved plan puts them in this step, even though the step 4 prompt didn't name them.
+29. **Continue** moves one day at a time and stops on a timeline day or as soon as any email arrives, so a condition email (for example "Mind the queues") is also a stop. It won't move while a decision email is unanswered.
+30. **"Mind the queues"** is sent the first time tickets sold exceed the people the site can serve, so with no facilities built it arrives with the first sales (day 24).
+31. **"Sales are slow"** (email 10) is checked only on the sales update days, once per festival, so it doesn't fire before the player has had a chance to book anyone.
+32. **The tutorial "Forecast panel first shown" line** is cued with the targets line the first time the hub opens. "Site map opens" uses `{capacity}` instead of a fixed 500.
+33. **Randy's Skip button** first shows his skip line ("Want to skip the chat?…") with Skip the chat and Keep chatting.
+34. **{cash} in the welcome email and the budget line** is the budget (£20,000), not cash after the overhead; the top bar shows cash after the overhead.
+35. **Before tickets go on sale** (day 26) a price change applies at once; after that, from the next day.
+36. **Counter-offers** are valid until three days after they're made and then lapse silently (the email's buttons switch off). A new offer replaces any standing counter.
+37. **A player walking away** sends no email and cues no Randy line; the "Band walks away" line and emails are for the band running out of patience.
+38. **Festival day** shows a placeholder with the forecast snapshot until step 5. There is no save yet (step 6), so reloading the page starts again.
+39. **New tuning numbers** in `tuning.json`: `decisions.salesSlowEmailThreshold` (0.6) and a `prep` group (counter expiry 3 days, nearly sold out 90%, ticket price slider £10 to £50 in £1 steps, negotiation fee step £10).

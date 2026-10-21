@@ -1,0 +1,68 @@
+.row {
+  padding: var(--space-s) 0;
+  border-top: 1px solid var(--colour-border);
+}
+
+.row:first-of-type {
+  border-top: none;
+}
+
+.row p {
+  margin: 2px 0 var(--space-s);
+}
+
+.rowHead {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-s);
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+}
+
+.value {
+  flex: 1;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.slider {
+  width: 100%;
+  min-height: var(--touch-target);
+  accent-color: var(--colour-accent);
+}
+
+.slots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-s);
+}
+
+.slotButton {
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  text-transform: capitalize;
+  font-size: 0.95rem;
+  overflow: hidden;
+}
+
+.slotButton span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}

@@ -1,13 +1,16 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles/global.css';
-import { MainMenu } from './screens/MainMenu';
+import { App } from './app/App';
+import { GameProvider } from './app/store';
 
 const root = document.getElementById('root');
 if (!root) throw new Error('Root element not found');
 
 createRoot(root).render(
   <StrictMode>
-    <MainMenu />
+    <GameProvider>
+      <App />
+    </GameProvider>
   </StrictMode>,
 );

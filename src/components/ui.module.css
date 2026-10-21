@@ -1,0 +1,339 @@
+/* Shared UI pieces: buttons, cards, chips, bars and the screen frame. */
+
+.screen {
+  min-height: 100dvh;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 calc(var(--space) + env(safe-area-inset-right)) calc(var(--space) + env(safe-area-inset-bottom))
+    calc(var(--space) + env(safe-area-inset-left));
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space);
+}
+
+.topBar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  margin: 0 calc(-1 * var(--space)) var(--space);
+  padding: calc(var(--space-s) + env(safe-area-inset-top)) var(--space) var(--space-s);
+  background: var(--colour-bg);
+  border-bottom: 1px solid var(--colour-border);
+}
+
+.topTitle {
+  flex: 1;
+  margin: 0;
+  font-size: 1.15rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.topStats {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.topStats strong {
+  font-size: 1rem;
+}
+
+.footer {
+  position: sticky;
+  bottom: 0;
+  margin: var(--space) calc(-1 * var(--space)) 0;
+  padding: var(--space-s) var(--space) calc(var(--space-s) + env(safe-area-inset-bottom));
+  background: var(--colour-bg);
+  border-top: 1px solid var(--colour-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+.button {
+  min-height: var(--touch-target);
+  min-width: var(--touch-target);
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  border: 2px solid var(--colour-border);
+  background: var(--colour-surface-2);
+  font-weight: 600;
+  text-align: center;
+}
+
+.button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.button:disabled {
+  opacity: 0.5;
+}
+
+.primary {
+  background: var(--colour-accent);
+  border-color: var(--colour-accent);
+  color: var(--colour-accent-text);
+}
+
+.danger {
+  border-color: var(--colour-bad);
+  color: var(--colour-bad);
+  background: transparent;
+}
+
+.ghost {
+  background: transparent;
+}
+
+.wide {
+  width: 100%;
+}
+
+.backButton {
+  composes: button ghost;
+  padding: 6px 10px;
+  font-size: 1.2rem;
+}
+
+.card {
+  background: var(--colour-surface);
+  border: 1px solid var(--colour-border);
+  border-radius: var(--radius);
+  padding: var(--space);
+}
+
+.cardTitle {
+  margin: 0 0 var(--space-s);
+  font-size: 1.05rem;
+}
+
+.muted {
+  color: var(--colour-muted);
+  font-size: 0.9rem;
+}
+
+.notice {
+  background: #5a2a2a;
+  border: 1px solid var(--colour-bad);
+  border-radius: var(--radius);
+  padding: var(--space-s) var(--space);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+}
+
+.ok {
+  color: var(--colour-ok);
+}
+
+.close {
+  color: var(--colour-close);
+}
+
+.bad {
+  color: var(--colour-bad);
+}
+
+.randy {
+  display: flex;
+  gap: var(--space-s);
+  align-items: flex-start;
+  background: var(--colour-paper);
+  color: var(--colour-ink);
+  border-radius: var(--radius);
+  padding: var(--space-s) var(--space);
+}
+
+.randyFace {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #c9a227;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+}
+
+.randyBody {
+  flex: 1;
+}
+
+.randyName {
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.randyText {
+  margin: 2px 0 var(--space-s);
+}
+
+.randyButtons {
+  display: flex;
+  gap: var(--space-s);
+  flex-wrap: wrap;
+}
+
+.randyButtons .button {
+  color: var(--colour-ink);
+  background: #fff;
+  border-color: #bbb;
+}
+
+.randyButtons .primary {
+  background: var(--colour-accent);
+  border-color: var(--colour-accent);
+}
+
+.menuRow {
+  composes: button;
+  display: flex;
+  align-items: center;
+  gap: var(--space);
+  width: 100%;
+  text-align: left;
+  background: var(--colour-surface);
+  min-height: 56px;
+}
+
+.menuIcon {
+  font-size: 1.4rem;
+}
+
+.menuLabel {
+  flex: 1;
+}
+
+.menuDetail {
+  color: var(--colour-muted);
+  font-weight: 400;
+}
+
+.badge {
+  background: var(--colour-accent);
+  color: var(--colour-accent-text);
+  border-radius: 999px;
+  padding: 0 8px;
+  font-size: 0.85rem;
+}
+
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-s) var(--space);
+  margin: 0;
+}
+
+.statGrid dt {
+  font-size: 0.85rem;
+  color: var(--colour-muted);
+}
+
+.statGrid dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.meter {
+  margin-top: var(--space-s);
+}
+
+.meterHead {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-s);
+  font-size: 0.9rem;
+}
+
+.meterTrack {
+  position: relative;
+  height: 12px;
+  margin-top: 4px;
+  border-radius: 6px;
+  background: var(--colour-bg);
+  overflow: hidden;
+}
+
+.meterFill {
+  height: 100%;
+  background: var(--colour-muted);
+}
+
+.meterFillOk {
+  background: var(--colour-ok);
+}
+
+.meterTarget {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--colour-text);
+}
+
+.compact {
+  composes: card;
+  padding: var(--space-s) var(--space);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px var(--space);
+  font-size: 0.9rem;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  margin-top: var(--space-s);
+}
+
+.option {
+  composes: button;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  text-align: left;
+}
+
+.optionEffect {
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: var(--colour-muted);
+}
+
+.chosen {
+  border-color: var(--colour-accent);
+}
+
+.buttonRow {
+  display: flex;
+  gap: var(--space-s);
+  flex-wrap: wrap;
+}
+
+.buttonRow > * {
+  flex: 1 1 auto;
+}
