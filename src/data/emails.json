@@ -1,0 +1,120 @@
+[
+  {
+    "id": "welcome", "number": 1, "from": "Randy Popping", "trigger": "day",
+    "subject": "Welcome to the {festival}",
+    "body": "Right then. You've {days_to_gates} days, £{cash} and a field. Book a headliner first; everything else follows.",
+    "buttons": [{ "label": "Open lineup", "action": "lineup" }]
+  },
+  {
+    "id": "noHeadliner", "number": 2, "from": "Randy Popping", "trigger": "day", "when": "noHeadliner",
+    "subject": "Still no headliner",
+    "body": "Bands won't sign for a festival without a name at the top. Sort the headliner before the rest.",
+    "buttons": [{ "label": "Open lineup", "action": "lineup" }]
+  },
+  {
+    "id": "dealDone", "number": 3, "from": "{band_name}'s agent", "trigger": "dealSigned",
+    "subject": "{band_name}: you've got a deal",
+    "body": "Happy to confirm {band_name} for the {slot} slot at £{fee}, with {merch_pct}% of the merch. See you on the day.",
+    "buttons": [{ "label": "View contract", "action": "lineup" }]
+  },
+  {
+    "id": "counter", "number": 4, "from": "{band_name}'s agent", "trigger": "bandCountered",
+    "subject": "{band_name}: counter-offer",
+    "body": "Thanks for the offer. {band_name} would do it for £{counter_fee}, the {counter_slot} slot and {counter_merch}% of the merch. Let us know within {days_left} days.",
+    "buttons": [
+      { "label": "Accept", "action": "acceptCounter" },
+      { "label": "Negotiate", "action": "negotiate" },
+      { "label": "Walk away", "action": "walkAway" }
+    ]
+  },
+  {
+    "id": "rejected", "number": 5, "from": "{band_name}'s agent", "trigger": "bandRejected",
+    "subject": "{band_name}: not this time",
+    "body": "We're going to pass on this one. Do come back to us next year.",
+    "buttons": [{ "label": "Find another act", "action": "lineup" }]
+  },
+  {
+    "id": "movedOn", "number": 6, "from": "{band_name}'s agent", "trigger": "bandMovedOn",
+    "subject": "{band_name} has moved on",
+    "body": "We've gone round a few times now, and the band has taken another date. No hard feelings.",
+    "buttons": [{ "label": "Find another act", "action": "lineup" }]
+  },
+  {
+    "id": "emergingContact", "number": 7, "from": "{band_name}'s agent", "trigger": "day", "when": "bandAvailable",
+    "subject": "{band_name} would love a slot",
+    "body": "{band_name} are building a following: {listeners} monthly listeners and rising. They'd play an early slot for a modest fee.",
+    "buttons": [{ "label": "Make an offer", "action": "negotiate" }, { "label": "Not now", "action": "dismiss" }]
+  },
+  {
+    "id": "ticketsLive", "number": 8, "from": "Box office", "trigger": "day",
+    "subject": "Tickets are live",
+    "body": "Tickets went on sale at £{price}. We'll send you a sales update each week.",
+    "buttons": [{ "label": "Change price", "action": "tickets" }]
+  },
+  {
+    "id": "salesUpdate", "number": 9, "from": "Box office", "trigger": "day",
+    "subject": "Sales update: {sold_pct}% sold",
+    "body": "{tickets_sold} of {capacity} tickets sold with {days_to_gates} days to go. At this rate we expect about {forecast} people on the day.",
+    "buttons": [{ "label": "View tickets", "action": "tickets" }]
+  },
+  {
+    "id": "salesSlow", "number": 10, "from": "Box office", "trigger": "day", "when": "forecastBelowSlow", "once": true,
+    "subject": "Sales are slow",
+    "body": "We're heading for about {forecast} people, {forecast_pct}% of the field. A bigger name on the bill or a lower price usually helps.",
+    "buttons": [{ "label": "View lineup", "action": "lineup" }, { "label": "Change price", "action": "tickets" }]
+  },
+  {
+    "id": "nearlySoldOut", "number": 11, "from": "Box office", "trigger": "condition", "when": "nearlySoldOut", "once": true,
+    "subject": "Nearly sold out",
+    "body": "Only {remaining} tickets left. Make sure your toilets and food can cope with a full field.",
+    "buttons": [{ "label": "Open site", "action": "site" }]
+  },
+  {
+    "id": "bookingConfirmed", "number": 12, "from": "Field & Flush Hire", "trigger": "facilitiesBooked",
+    "subject": "Booking confirmed: {units} {facility}",
+    "body": "We'll deliver {units} {facility} on the morning of the festival. Total: £{cost}.",
+    "buttons": [{ "label": "View site", "action": "site" }]
+  },
+  {
+    "id": "mindQueues", "number": 13, "from": "Randy Popping", "trigger": "condition", "when": "soldOverServed", "once": true,
+    "subject": "Mind the queues",
+    "body": "You've sold {tickets_sold} tickets and have toilets for {capacity_served}. I've seen queues start fights over less.",
+    "buttons": [{ "label": "Open site", "action": "site" }]
+  },
+  {
+    "id": "headlinerNews", "number": 14, "from": "{newspaper}", "trigger": "headlinerSigned", "once": true,
+    "subject": "{festival} lands {band_name}",
+    "body": "{band_name} will headline this year's {festival}, organisers have confirmed. Tickets from £{price}.",
+    "buttons": [{ "label": "Read", "action": "dismiss" }]
+  },
+  {
+    "id": "emptySlot", "number": 15, "from": "Randy Popping", "trigger": "day", "when": "emptySlot",
+    "subject": "You've an empty slot",
+    "body": "Your {slot} slot is still empty. An empty stage makes for a quiet field.",
+    "buttons": [{ "label": "Open lineup", "action": "lineup" }]
+  },
+  {
+    "id": "gatesTomorrow", "number": 16, "from": "Randy Popping", "trigger": "day",
+    "subject": "Gates open tomorrow",
+    "body": "Last chance to check the site. Once the gates open, it's too late to add a toilet.",
+    "buttons": [{ "label": "Open site", "action": "site" }, { "label": "Start festival", "action": "continue" }]
+  },
+  {
+    "id": "noiseLimits", "number": 18, "from": "{venue}", "trigger": "headlinerSigned", "once": true,
+    "subject": "Noise limits for the day",
+    "body": "A reminder that music must stay under the agreed limit and finish by 11pm. Complaints from the village go to the council, who may fine you.",
+    "buttons": [{ "label": "Got it", "action": "dismiss" }]
+  },
+  {
+    "id": "soundLimiter", "number": 22, "from": "{venue}", "trigger": "day", "decision": "sound-limiter",
+    "subject": "Keeping the village happy",
+    "body": "We had complaints last year about the music. You can install a sound limiter for £{cost}, agree to finish at 10:30pm, or take your chances.",
+    "buttons": []
+  },
+  {
+    "id": "slowSalesDecision", "number": 23, "from": "Box office", "trigger": "day", "when": "forecastBelowDecision", "decision": "slow-sales",
+    "subject": "Sales need a push",
+    "body": "We're forecasting {forecast} people, {forecast_pct}% of the field. We can drop the price by £{price_cut}, put posters up around the area for £{poster_cost}, or wait and see.",
+    "buttons": []
+  }
+]

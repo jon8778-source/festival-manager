@@ -1,10 +1,27 @@
 :root {
   --colour-bg: #1d3557;
+  --colour-surface: #24406a;
+  --colour-surface-2: #2e4f80;
+  --colour-border: #46699e;
   --colour-text: #f1faee;
+  --colour-muted: #c3d2e6;
   --colour-accent: #ffb703;
+  --colour-accent-text: #1d1d1d;
+  --colour-ok: #7bd389;
+  --colour-close: #ffd166;
+  --colour-bad: #ff8a80;
+  --colour-grass: #2f6b3a;
+  --colour-grass-light: #3d8549;
+  --colour-paper: #f5efe0;
+  --colour-ink: #1d1d1d;
   --space: 16px;
+  --space-s: 8px;
+  --radius: 10px;
   --touch-target: 44px;
+  --max-width: 720px;
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
   color: var(--colour-text);
   background: var(--colour-bg);
 }
@@ -19,4 +36,40 @@ body {
   margin: 0;
   min-width: 360px;
   background: var(--colour-bg);
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+:focus-visible {
+  outline: 3px solid var(--colour-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }

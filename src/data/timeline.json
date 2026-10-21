@@ -1,0 +1,29 @@
+{
+  "festivals": {
+    "1": {
+      "prepDays": 30,
+      "onSaleDay": 26,
+      "facilityDeadline": 3,
+      "lineupLock": 1,
+      "stops": [
+        { "day": 30, "emails": [{ "id": "welcome" }] },
+        { "day": 26, "emails": [{ "id": "ticketsLive" }] },
+        { "day": 20, "emails": [{ "id": "soundLimiter" }, { "id": "emergingContact", "bandId": "the-mud-pies" }] },
+        { "day": 16, "emails": [{ "id": "salesUpdate" }, { "id": "salesSlow" }] },
+        { "day": 14, "emails": [{ "id": "salesUpdate" }, { "id": "slowSalesDecision" }, { "id": "salesSlow" }] },
+        { "day": 10, "emails": [{ "id": "noHeadliner" }] },
+        { "day": 7, "emails": [{ "id": "salesUpdate" }, { "id": "salesSlow" }] },
+        { "day": 3, "emails": [{ "id": "salesUpdate" }, { "id": "emptySlot" }] },
+        { "day": 1, "emails": [{ "id": "gatesTomorrow" }] },
+        { "day": 0, "emails": [] }
+      ]
+    }
+  },
+  "salesCurve": [
+    { "fromDay": 26, "toDay": 14, "share": 0.2 },
+    { "fromDay": 14, "toDay": 7, "share": 0.25 },
+    { "fromDay": 7, "toDay": 3, "share": 0.3 },
+    { "fromDay": 3, "toDay": 0, "share": 0.15 }
+  ],
+  "walkUpShare": 0.1
+}

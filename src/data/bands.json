@@ -1,0 +1,354 @@
+[
+  {
+    "id": "the-hedgerows",
+    "name": "The Hedgerows",
+    "genre": "Folk",
+    "tier": 1,
+    "reputation": 15,
+    "legacy": 10,
+    "hype": 20,
+    "monthlyListeners": 4200,
+    "trend": "Steady",
+    "feeAsk": 300,
+    "merchAsk": 10,
+    "festivals": [
+      1,
+      2,
+      3
+    ],
+    "emerging": false,
+    "notes": "Safe opener"
+  },
+  {
+    "id": "lazy-sundays",
+    "name": "Lazy Sundays",
+    "genre": "Acoustic pop",
+    "tier": 1,
+    "reputation": 20,
+    "legacy": 5,
+    "hype": 30,
+    "monthlyListeners": 6800,
+    "trend": "Steady",
+    "feeAsk": 400,
+    "merchAsk": 10,
+    "festivals": [
+      1,
+      2,
+      3
+    ],
+    "emerging": false,
+    "notes": "Safe opener"
+  },
+  {
+    "id": "the-mud-pies",
+    "name": "The Mud Pies",
+    "genre": "Rock",
+    "tier": 1,
+    "reputation": 18,
+    "legacy": 0,
+    "hype": 55,
+    "monthlyListeners": 9500,
+    "trend": "Rising fast",
+    "feeAsk": 450,
+    "merchAsk": 10,
+    "festivals": [
+      1,
+      2,
+      3
+    ],
+    "emerging": true,
+    "notes": "Emerging: rises fast after a good slot"
+  },
+  {
+    "id": "kettle-logic",
+    "name": "Kettle Logic",
+    "genre": "Pop",
+    "tier": 1,
+    "reputation": 12,
+    "legacy": 0,
+    "hype": 40,
+    "monthlyListeners": 3100,
+    "trend": "Rising fast",
+    "feeAsk": 300,
+    "merchAsk": 10,
+    "festivals": [
+      1,
+      2,
+      3
+    ],
+    "emerging": true,
+    "notes": "Emerging: cheap, wants a better slot"
+  },
+  {
+    "id": "sunday-roast-club",
+    "name": "Sunday Roast Club",
+    "genre": "Ska",
+    "tier": 1,
+    "reputation": 22,
+    "legacy": 15,
+    "hype": 25,
+    "monthlyListeners": 7400,
+    "trend": "Steady",
+    "feeAsk": 500,
+    "merchAsk": 10,
+    "festivals": [
+      1,
+      2,
+      3
+    ],
+    "emerging": false,
+    "notes": "Fun daytime act"
+  },
+  {
+    "id": "corduroy-kings",
+    "name": "Corduroy Kings",
+    "genre": "Rock",
+    "tier": 2,
+    "reputation": 35,
+    "legacy": 25,
+    "hype": 30,
+    "monthlyListeners": 38000,
+    "trend": "Steady",
+    "feeAsk": 1800,
+    "merchAsk": 15,
+    "festivals": [
+      1,
+      2,
+      3
+    ],
+    "emerging": false,
+    "notes": "Reliable support"
+  },
+  {
+    "id": "velvet-static",
+    "name": "Velvet Static",
+    "genre": "Indie",
+    "tier": 2,
+    "reputation": 30,
+    "legacy": 5,
+    "hype": 60,
+    "monthlyListeners": 52000,
+    "trend": "Rising fast",
+    "feeAsk": 1300,
+    "merchAsk": 15,
+    "festivals": [
+      1,
+      2,
+      3
+    ],
+    "emerging": true,
+    "notes": "Emerging: heading for tier 4"
+  },
+  {
+    "id": "the-wet-wellies",
+    "name": "The Wet Wellies",
+    "genre": "Punk",
+    "tier": 2,
+    "reputation": 28,
+    "legacy": 20,
+    "hype": 35,
+    "monthlyListeners": 29000,
+    "trend": "Rising",
+    "feeAsk": 1200,
+    "merchAsk": 15,
+    "festivals": [
+      1,
+      2,
+      3
+    ],
+    "emerging": false,
+    "notes": "Loud; mind the sound bleed"
+  },
+  {
+    "id": "amber-lights",
+    "name": "Amber Lights",
+    "genre": "Hard Rock",
+    "tier": 2,
+    "reputation": 38,
+    "legacy": 30,
+    "hype": 30,
+    "monthlyListeners": 61000,
+    "trend": "Steady",
+    "feeAsk": 2000,
+    "merchAsk": 15,
+    "festivals": [
+      1,
+      2,
+      3
+    ],
+    "emerging": false,
+    "notes": "Crowd-pleaser"
+  },
+  {
+    "id": "neon-harbour",
+    "name": "Neon Harbour",
+    "genre": "Dance",
+    "tier": 2,
+    "reputation": 32,
+    "legacy": 10,
+    "hype": 50,
+    "monthlyListeners": 47000,
+    "trend": "Rising fast",
+    "feeAsk": 1600,
+    "merchAsk": 15,
+    "festivals": [
+      2,
+      3
+    ],
+    "emerging": true,
+    "notes": "Emerging: dance fans later"
+  },
+  {
+    "id": "dust-and-diesel",
+    "name": "Dust & Diesel",
+    "genre": "Country rock",
+    "tier": 3,
+    "reputation": 50,
+    "legacy": 45,
+    "hype": 35,
+    "monthlyListeners": 140000,
+    "trend": "Steady",
+    "feeAsk": 4500,
+    "merchAsk": 20,
+    "festivals": [
+      1,
+      2,
+      3
+    ],
+    "emerging": false,
+    "notes": "Festival 1 headliner"
+  },
+  {
+    "id": "northern-signal",
+    "name": "Northern Signal",
+    "genre": "Synth-pop",
+    "tier": 3,
+    "reputation": 45,
+    "legacy": 35,
+    "hype": 45,
+    "monthlyListeners": 210000,
+    "trend": "Rising",
+    "feeAsk": 4000,
+    "merchAsk": 20,
+    "festivals": [
+      1,
+      2,
+      3
+    ],
+    "emerging": false,
+    "notes": "Festival 1 headliner option"
+  },
+  {
+    "id": "granite-coast",
+    "name": "Granite Coast",
+    "genre": "Metal",
+    "tier": 3,
+    "reputation": 48,
+    "legacy": 50,
+    "hype": 25,
+    "monthlyListeners": 165000,
+    "trend": "Falling",
+    "feeAsk": 3800,
+    "merchAsk": 20,
+    "festivals": [
+      1,
+      2,
+      3
+    ],
+    "emerging": false,
+    "notes": "Older fans; cheaper as hype fades"
+  },
+  {
+    "id": "the-paper-tigers",
+    "name": "The Paper Tigers",
+    "genre": "Indie pop",
+    "tier": 3,
+    "reputation": 55,
+    "legacy": 20,
+    "hype": 65,
+    "monthlyListeners": 380000,
+    "trend": "Rising fast",
+    "feeAsk": 5500,
+    "merchAsk": 20,
+    "festivals": [
+      2,
+      3
+    ],
+    "emerging": false,
+    "notes": "High hype, low legacy"
+  },
+  {
+    "id": "midnight-lantern",
+    "name": "Midnight Lantern",
+    "genre": "Electronic",
+    "tier": 3,
+    "reputation": 52,
+    "legacy": 25,
+    "hype": 55,
+    "monthlyListeners": 290000,
+    "trend": "Rising",
+    "feeAsk": 5000,
+    "merchAsk": 20,
+    "festivals": [
+      2,
+      3
+    ],
+    "emerging": false,
+    "notes": ""
+  },
+  {
+    "id": "the-royal-mile",
+    "name": "The Royal Mile",
+    "genre": "Metal",
+    "tier": 4,
+    "reputation": 70,
+    "legacy": 65,
+    "hype": 50,
+    "monthlyListeners": 1200000,
+    "trend": "Steady",
+    "feeAsk": 12000,
+    "merchAsk": 25,
+    "festivals": [
+      2,
+      3
+    ],
+    "emerging": false,
+    "notes": "Needs reputation 50"
+  },
+  {
+    "id": "saffron-skies",
+    "name": "Saffron Skies",
+    "genre": "Pop",
+    "tier": 4,
+    "reputation": 72,
+    "legacy": 40,
+    "hype": 80,
+    "monthlyListeners": 2600000,
+    "trend": "Rising",
+    "feeAsk": 15000,
+    "merchAsk": 25,
+    "festivals": [
+      3
+    ],
+    "emerging": false,
+    "notes": "Needs reputation 50"
+  },
+  {
+    "id": "the-last-heatwave",
+    "name": "The Last Heatwave",
+    "genre": "Anthemic rock",
+    "tier": 5,
+    "reputation": 88,
+    "legacy": 85,
+    "hype": 70,
+    "monthlyListeners": 8400000,
+    "trend": "Steady",
+    "feeAsk": 30000,
+    "merchAsk": 30,
+    "festivals": [
+      3
+    ],
+    "emerging": false,
+    "notes": "Needs reputation 75: a dream booking"
+  }
+]

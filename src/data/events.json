@@ -1,0 +1,24 @@
+[
+  {
+    "id": "sound-limiter",
+    "kind": "prep",
+    "festivals": [1, 2, 3],
+    "title": "Keeping the village happy",
+    "options": [
+      { "key": "A", "label": "Install a sound limiter", "costShareR": 0.006, "customers": 0, "bands": 0, "reputation": 0, "prevents": ["noise-complaint"], "effect": "The noise complaint cannot happen." },
+      { "key": "B", "label": "Agree to finish at 10:30pm", "costShareR": 0, "customers": 0, "bands": -3, "reputation": 0, "prevents": ["noise-complaint"], "effect": "A shorter headline set; the complaint cannot happen." },
+      { "key": "C", "label": "Decline", "costShareR": 0, "customers": 0, "bands": 0, "reputation": 0, "effect": "The noise complaint stays possible on the day." }
+    ]
+  },
+  {
+    "id": "slow-sales",
+    "kind": "prep",
+    "festivals": [1, 2, 3],
+    "title": "Sales need a push",
+    "options": [
+      { "key": "A", "label": "Cut the ticket price", "costShareR": 0, "customers": 0, "bands": 0, "reputation": 0, "priceCutShareOfFair": 0.08, "effect": "Lower price from tomorrow, higher demand." },
+      { "key": "B", "label": "Put up posters", "costShareR": 0.012, "customers": 0, "bands": 0, "reputation": 0, "attendanceBonus": 0.03, "effect": "Forecast attendance +3 points." },
+      { "key": "C", "label": "Hold your nerve", "costShareR": 0, "customers": 0, "bands": 0, "reputation": 0, "effect": "No change." }
+    ]
+  }
+]

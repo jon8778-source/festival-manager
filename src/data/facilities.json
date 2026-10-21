@@ -1,0 +1,4 @@
+[
+  { "id": "toilets", "name": "Toilets", "singular": "toilet block", "plural": "toilet blocks", "emoji": "🚻", "servesPerUnit": 100 },
+  { "id": "food", "name": "Food stall", "singular": "food stall", "plural": "food stalls", "emoji": "🍔", "servesPerUnit": 100 }
+]

@@ -73,7 +73,23 @@ export interface Tuning {
     hintSpreadKnown: number;
     verdictCloseAt: number;
   };
-  decisions: { slowSalesThreshold: number };
+  decisions: {
+    /** Slow-sales decision appears below this forecast attendance share. */
+    slowSalesThreshold: number;
+    /** The "Sales are slow" email arrives below this forecast attendance share. */
+    salesSlowEmailThreshold: number;
+  };
+  prep: {
+    /** Days a band's counter-offer stays open. */
+    counterExpiryDays: number;
+    /** Share of capacity sold that sends the "Nearly sold out" email. */
+    nearlySoldOutShare: number;
+    ticketPriceMin: number;
+    ticketPriceMax: number;
+    ticketPriceStep: number;
+    /** Step for the fee control in negotiations, in pounds. */
+    feeStep: number;
+  };
   bandMood: { delighted: number; happy: number; grumbling: number };
 }
 

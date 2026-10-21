@@ -1,0 +1,22 @@
+[
+  {
+    "id": "village-green",
+    "number": 1,
+    "name": "Village Green",
+    "capacity": 500,
+    "days": 1,
+    "fairPrice": 25,
+    "startingCash": 20000,
+    "promoterAdvance": false,
+    "slots": ["headliner", "support", "opener"],
+    "facilityTypes": ["toilets", "food"],
+    "plotCount": 12,
+    "targets": { "customers": 0.65, "bands": 0.6, "profit": 0.05 },
+    "decisionCount": 3,
+    "prepDays": 30,
+    "newspaper": "The Village Gazette",
+    "venue": "Village Green Trust (the venue)",
+    "startingReputation": 50,
+    "draft": false
+  }
+]

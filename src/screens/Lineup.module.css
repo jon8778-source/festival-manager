@@ -1,0 +1,74 @@
+.bill {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-s);
+}
+
+.slot {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-s) var(--space);
+  border-radius: var(--radius);
+  border: 2px dashed var(--colour-border);
+  background: var(--colour-surface);
+}
+
+.headlinerSlot {
+  grid-column: 1 / -1;
+  border-color: var(--colour-accent);
+}
+
+.slotLabel {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--colour-muted);
+}
+
+.slotBand {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.headlinerSlot .slotBand {
+  font-size: 1.35rem;
+}
+
+.bands {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-s);
+}
+
+@media (min-width: 600px) {
+  .bands {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.band {
+  width: 100%;
+  min-height: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+  padding: 10px var(--space);
+  border-radius: var(--radius);
+  border: 2px solid var(--colour-border);
+  background: var(--colour-surface);
+}
+
+.selected {
+  border-color: var(--colour-accent);
+}
+
+.bandHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-s);
+}
