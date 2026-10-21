@@ -6,10 +6,11 @@ import eventsJson from '../data/events.json';
 import facilitiesJson from '../data/facilities.json';
 import festivalsJson from '../data/festivals.json';
 import linesJson from '../data/lines.json';
+import newspaperJson from '../data/newspaper.json';
 import timelineJson from '../data/timeline.json';
 import type { EventOption } from './events';
 import type { Slot } from './negotiation';
-import type { Targets } from './stars';
+import type { BandMood, StarArea, Targets } from './stars';
 
 export interface Band {
   id: string;
@@ -119,6 +120,23 @@ export interface TutorialLine {
 export interface Lines {
   skip: string;
   tutorial: TutorialLine[];
+  /** Randy on the results screen; {stars} is filled in. */
+  results: { intro: string; passed: string; failed: string };
+  /** One basic tip after a failed festival, by weakest star. */
+  tips: Record<StarArea, string>;
+}
+
+export interface Newspaper {
+  /** Paper name per festival number. */
+  papers: Record<string, string>;
+  /** Headline options per star count. */
+  headlines: Record<string, string[]>;
+  weakestIssue: Record<'queues' | 'price' | 'bands' | 'money', string>;
+  opening: Record<StarArea, string>;
+  closing: Record<'queues' | 'price' | 'bands' | 'money', string>;
+  events: { noiseFine: string };
+  success: { soldOut: string; noQueue: string; limiter: string; headlinerDelighted: string };
+  bandMood: Record<BandMood, string>;
 }
 
 export interface TimelineStop {
@@ -166,6 +184,7 @@ export interface Content {
   emails: EmailTemplate[];
   lines: Lines;
   timeline: Timeline;
+  newspaper: Newspaper;
 }
 
 export const defaultContent: Content = {
@@ -176,6 +195,7 @@ export const defaultContent: Content = {
   emails: emailsJson as EmailTemplate[],
   lines: linesJson,
   timeline: timelineJson,
+  newspaper: newspaperJson,
 };
 
 function find<T extends { id: string }>(items: readonly T[], id: string, what: string): T {

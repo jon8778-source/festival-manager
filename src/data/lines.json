@@ -133,5 +133,15 @@
       "trigger": "headlinerOn",
       "text": "That's your headliner on. This is the bit everyone remembers."
     }
-  ]
+  ],
+  "results": {
+    "intro": "Here's how you did: {stars} stars out of three.",
+    "passed": "Not bad at all. Next year they'll give you a bigger field and bigger names.",
+    "failed": "Not this time. Have another go, and I'll tell you what went wrong."
+  },
+  "tips": {
+    "profit": "You spent more than the day brought in. Next time, trim the lineup or nudge the ticket price.",
+    "customers": "The crowd went home grumbling. Look at your queues and your ticket price first.",
+    "bands": "The bands weren't happy. Pay closer to their asking price, and give them the slot they want."
+  }
 }

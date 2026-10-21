@@ -38,7 +38,7 @@ export function MainMenu() {
       <nav className={styles.buttons}>
         {game && (
           <Button variant="primary" wide onClick={() => go({ name: 'hub' })}>
-            Continue planning
+            {game.phase === 'prep' ? 'Continue planning' : game.phase === 'day' ? 'Back to the festival' : 'Read the review'}
           </Button>
         )}
         <Button variant={game ? 'secondary' : 'primary'} wide onClick={startNewGame}>
