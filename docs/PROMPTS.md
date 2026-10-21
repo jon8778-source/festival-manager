@@ -31,7 +31,7 @@ After merging: in the repository's Settings, open Pages and set the source to Gi
 
 ## Step 4: Preparation phase
 
-> Build the preparation phase screens in React, as described in section 10 of the spec: the main menu (festival poster), the preparation hub (inbox plus menu list and Continue), the inbox, lineup, negotiation, site (fixed map and build tray), tickets and finances. Wire them to the core rules: the countdown, with Continue jumping to the next email or deadline; emails triggering on the festival 1 timeline; ticket sales following the curve; negotiations through the negotiation rules; and facility booking with the day 3 deadline. Use placeholder art and a portrait, mobile-first layout that also works on a tablet. Show Randy's tutorial lines at the right moments, with a skip button.
+> Build the preparation phase screens in React, as described in section 10 of the spec: the main menu (festival poster), the preparation hub (inbox plus menu list and Continue), the inbox, lineup, negotiation, site (fixed map and build tray), tickets and finances. Wire them to the core rules: the countdown, with Continue jumping to the next email, decision or deadline; the live forecast panel (section 9 of the spec), recalculating instantly from the core formulas; the preparation decision emails (sound limiter and slow sales), using the same three-option card as the festival day; emails triggering on the festival 1 timeline; ticket sales following the curve; negotiations through the negotiation rules; and facility booking with the day 3 deadline. Use placeholder art and a portrait, mobile-first layout that also works on a tablet. Show Randy's tutorial lines at the right moments, with a skip button.
 
 ## Step 5: Festival day
 
