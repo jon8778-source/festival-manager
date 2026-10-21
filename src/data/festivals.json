@@ -1,0 +1,113 @@
+[
+  {
+    "id": "village-green",
+    "number": 1,
+    "name": "Village Green",
+    "draft": false,
+    "capacity": 500,
+    "days": 1,
+    "fairPrice": 25,
+    "fullScaleRevenue": 12500,
+    "startingCash": 20000,
+    "budgetNote": "£20,000 starting cash",
+    "stages": 1,
+    "slots": [
+      "opener",
+      "support",
+      "headliner"
+    ],
+    "facilityTypes": [
+      "toilets",
+      "food"
+    ],
+    "unitCost": 300,
+    "bandPoolSize": 12,
+    "startingReputation": 50,
+    "targets": {
+      "customers": 0.65,
+      "bands": 0.6,
+      "profit": 0.05
+    },
+    "decisionCount": 3,
+    "decisionNote": "food queue (only if food is short), band running late, noise complaint",
+    "prepDays": 30,
+    "newspaper": "The Village Gazette",
+    "referencePlan": "Lineup £6,600, facilities £2,800, fixed £4,375, band merch payout about £300; income about £15,260; profit about 8%"
+  },
+  {
+    "id": "local-field",
+    "number": 2,
+    "name": "The Local Field",
+    "draft": true,
+    "capacity": 1500,
+    "days": 1,
+    "fairPrice": 30,
+    "fullScaleRevenue": 45000,
+    "startingCash": null,
+    "budgetNote": "Cash topped up to £49,500 by the promoter advance",
+    "stages": 1,
+    "slots": [
+      "opener",
+      "support",
+      "support2",
+      "headliner"
+    ],
+    "facilityTypes": [
+      "toilets",
+      "food",
+      "bar"
+    ],
+    "unitCost": 240,
+    "bandPoolSize": 16,
+    "startingReputation": null,
+    "targets": {
+      "customers": 0.65,
+      "bands": 0.6,
+      "profit": 0.1
+    },
+    "decisionCount": 4,
+    "decisionNote": "stage equipment, merch, plus 2 random",
+    "prepDays": 60,
+    "newspaper": "The County Courier",
+    "referencePlan": "Lineup £23,100, facilities £9,800, fixed £15,750, band merch payout about £1,100; profit to be re-checked in the spreadsheet"
+  },
+  {
+    "id": "two-stages",
+    "number": 3,
+    "name": "Two Stages",
+    "draft": true,
+    "capacity": 3000,
+    "days": 1,
+    "fairPrice": 40,
+    "fullScaleRevenue": 120000,
+    "startingCash": null,
+    "budgetNote": "Cash topped up to £132,000 by the promoter advance",
+    "stages": 2,
+    "slots": [
+      "opener",
+      "support",
+      "headliner",
+      "secondOpener",
+      "secondSupport",
+      "secondHeadliner"
+    ],
+    "facilityTypes": [
+      "toilets",
+      "food",
+      "bar"
+    ],
+    "unitCost": 320,
+    "bandPoolSize": 18,
+    "startingReputation": null,
+    "targets": {
+      "customers": 0.67,
+      "bands": 0.62,
+      "profit": 0.12
+    },
+    "decisionCount": 5,
+    "decisionNote": "headliner storms off, plus 4 from the random pool and merch",
+    "prepDays": 60,
+    "newspaper": "The Weekend Reporter",
+    "referencePlan": "Lineup £61,500, facilities £26,100, fixed £42,000, band merch payout about £3,000; profit to be re-checked in the spreadsheet"
+  }
+]

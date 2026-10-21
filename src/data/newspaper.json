@@ -1,0 +1,71 @@
+{
+  "papers": {
+    "1": "The Village Gazette",
+    "2": "The County Courier",
+    "3": "The Weekend Reporter"
+  },
+  "weakestIssues": {
+    "queues": "long queues",
+    "price": "steep prices",
+    "bands": "unhappy acts",
+    "money": "money worries"
+  },
+  "headlines": {
+    "0": [
+      "{festival} a washout",
+      "Questions for organisers after {festival}"
+    ],
+    "1": [
+      "Mixed reviews for {festival}",
+      "{weakest_issue} spoil the mood at {festival}"
+    ],
+    "2": [
+      "{festival} delivers, mostly",
+      "A good day out at {festival}, despite {weakest_issue}"
+    ],
+    "3": [
+      "{headliner} bring the house down at {festival}",
+      "{festival} a triumph from first band to last"
+    ]
+  },
+  "opening": {
+    "customers": "A cracking day out: well run, well fed and full of smiles.",
+    "bands": "The acts looked delighted to be there, and it showed on stage.",
+    "profit": "Organisers will be pleased with the takings, and the crowd got their money's worth."
+  },
+  "closing": {
+    "queues": "The only grumble: the queue for {facility}.",
+    "price": "At £{price} a ticket, not everyone was smiling.",
+    "bands": "{band_name} looked like they'd rather be elsewhere.",
+    "money": "Word is the organisers spent more than they took."
+  },
+  "events": {
+    "headlinerWalkedOff": "{headliner} briefly stormed off stage, to gasps from the front row.",
+    "noiseFine": "The council has since fined organisers £{fine} over noise.",
+    "rainCoveredArea": "When the rain came, a covered area kept spirits dry.",
+    "rainIgnored": "A soggy afternoon tested even the hardiest fans.",
+    "bandPulledOut": "{band_name} pulled out on the day, leaving a gap in the bill."
+  },
+  "success": {
+    "noQueue": "Plenty of food stalls meant no one queued long for lunch.",
+    "limiter": "A sound limiter kept the peace with the neighbours, and the music never stopped.",
+    "headlinerDelighted": "{headliner} looked thrilled to be there, and played like it.",
+    "soldOut": "Every ticket went, and the field was full by teatime."
+  },
+  "successNote": "Use only for things that actually happened.",
+  "spotlight": {
+    "template": "Spotlight: {band_name}, who played {last_festival} last year, have since {growth_event}.",
+    "growthEvents": [
+      "signed a record deal",
+      "sold out their first tour",
+      "passed {new_listeners} monthly listeners"
+    ]
+  },
+  "statsBox": "Profit £{profit}; crowd {attendance} people; band mood (Delighted, Happy, Grumbling or Furious); stars",
+  "moodLabels": {
+    "delighted": "Delighted",
+    "happy": "Happy",
+    "grumbling": "Grumbling",
+    "furious": "Furious"
+  }
+}

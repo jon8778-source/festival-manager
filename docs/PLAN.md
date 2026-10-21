@@ -120,7 +120,7 @@ MainMenu (poster) ─Continue planning / New game─► PrepHub ─► Inbox ─
 
 ## 8. Files to create
 
-**Config and scripts:** `scripts/build-content.ts`, plus an edit to `package.json` (`content` script).
+**Config and scripts:** `scripts/build-content.ts`, `scripts/content/markdown.ts` (table reading), `scripts/content/convert.ts` (CONTENT.md to content), `scripts/content/structure.ts` (ids, button actions and clock times the doc doesn't spell out) and `scripts/content/files.ts`, plus edits to `package.json` (`content` script) and `tsconfig.json` (include `scripts`, allow `.ts` imports for Node).
 
 **src/core:** `random.ts`, `math.ts` (clamp and sum), `tuning.ts`, `content.ts`, `economy.ts`, `negotiation.ts`, `calendar.ts`, `emails.ts`, `events.ts`, `stars.ts`, `results.ts`, `tutorial.ts`, `game.ts` (replaces the placeholder), `save.ts`, `playtestLog.ts`, `types.ts` (shared ids and unions).
 

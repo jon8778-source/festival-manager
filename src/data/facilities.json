@@ -1,0 +1,23 @@
+[
+  {
+    "id": "toilets",
+    "name": "Toilet block",
+    "plural": "toilets",
+    "emoji": "🚻",
+    "firstFestival": 1
+  },
+  {
+    "id": "food",
+    "name": "Food stall",
+    "plural": "food stalls",
+    "emoji": "🍔",
+    "firstFestival": 1
+  },
+  {
+    "id": "bar",
+    "name": "Bar",
+    "plural": "bars",
+    "emoji": "🍺",
+    "firstFestival": 2
+  }
+]

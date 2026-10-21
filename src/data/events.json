@@ -1,0 +1,664 @@
+[
+  {
+    "id": "food-stall-queue",
+    "name": "Food stall queue",
+    "phase": "day",
+    "from": null,
+    "when": "Midday, only if food capacity is below 1.2 x attendees",
+    "schedule": [
+      {
+        "festival": 1,
+        "kind": "scripted",
+        "chance": null,
+        "at": "13:00",
+        "day": null,
+        "condition": "food-short"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "label": "Call in a pop-up food van at short notice (about £375)",
+        "effect": null,
+        "costShareR": 0.03,
+        "customers": 0,
+        "bands": 0,
+        "reputation": 0
+      },
+      {
+        "key": "B",
+        "label": "Open a free water and snacks point (about £60)",
+        "effect": null,
+        "costShareR": 0.005,
+        "customers": -2,
+        "bands": 0,
+        "reputation": 0
+      },
+      {
+        "key": "C",
+        "label": "Do nothing",
+        "effect": null,
+        "costShareR": 0,
+        "customers": -8,
+        "bands": 0,
+        "reputation": 0
+      }
+    ]
+  },
+  {
+    "id": "band-running-late",
+    "name": "Band running late",
+    "phase": "day",
+    "from": null,
+    "when": "Scripted, early afternoon",
+    "schedule": [
+      {
+        "festival": 1,
+        "kind": "scripted",
+        "chance": null,
+        "at": "14:30",
+        "day": null,
+        "condition": null
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "label": "Stretch the opener's set (overtime, about £60)",
+        "effect": null,
+        "costShareR": 0.005,
+        "customers": 0,
+        "bands": 0,
+        "reputation": 0
+      },
+      {
+        "key": "B",
+        "label": "Play music over the speakers",
+        "effect": null,
+        "costShareR": 0,
+        "customers": -3,
+        "bands": 0,
+        "reputation": 0
+      },
+      {
+        "key": "C",
+        "label": "Cut the late band's set short",
+        "effect": null,
+        "costShareR": 0,
+        "customers": -1,
+        "bands": -5,
+        "reputation": 0
+      }
+    ]
+  },
+  {
+    "id": "noise-complaint",
+    "name": "Noise complaint",
+    "phase": "day",
+    "from": null,
+    "when": "Scripted in the evening at festival 1; then up to once per festival (50%)",
+    "schedule": [
+      {
+        "festival": 1,
+        "kind": "scripted",
+        "chance": null,
+        "at": "20:00",
+        "day": null,
+        "condition": null
+      },
+      {
+        "festival": 2,
+        "kind": "random",
+        "chance": 0.5,
+        "at": null,
+        "day": null,
+        "condition": null
+      },
+      {
+        "festival": 3,
+        "kind": "random",
+        "chance": 0.5,
+        "at": null,
+        "day": null,
+        "condition": null
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "label": "Turn it down",
+        "effect": null,
+        "costShareR": 0,
+        "customers": -3,
+        "bands": -5,
+        "reputation": 0
+      },
+      {
+        "key": "B",
+        "label": "Ignore it: 25% chance of a fine of 5% of R (about £625 at festival 1)",
+        "effect": null,
+        "costShareR": 0,
+        "customers": 0,
+        "bands": 0,
+        "reputation": 0,
+        "risksFine": true
+      }
+    ]
+  },
+  {
+    "id": "stage-equipment-breaks",
+    "name": "Stage equipment breaks",
+    "phase": "day",
+    "from": null,
+    "when": "Scripted, mid-afternoon",
+    "schedule": [
+      {
+        "festival": 2,
+        "kind": "scripted",
+        "chance": null,
+        "at": "15:30",
+        "day": null,
+        "condition": null
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "label": "Hire a replacement (about £1,350)",
+        "effect": null,
+        "costShareR": 0.03,
+        "customers": 0,
+        "bands": 0,
+        "reputation": 0
+      },
+      {
+        "key": "B",
+        "label": "Borrow kit from another band",
+        "effect": null,
+        "costShareR": 0,
+        "customers": 0,
+        "bands": -4,
+        "reputation": 0
+      },
+      {
+        "key": "C",
+        "label": "Play on without it",
+        "effect": null,
+        "costShareR": 0,
+        "customers": -6,
+        "bands": -4,
+        "reputation": 0
+      }
+    ]
+  },
+  {
+    "id": "merch-selling-fast",
+    "name": "Merch selling fast",
+    "phase": "day",
+    "from": null,
+    "when": "Scripted at festival 2 (evening); random at festival 3 (50%)",
+    "schedule": [
+      {
+        "festival": 2,
+        "kind": "scripted",
+        "chance": null,
+        "at": "20:00",
+        "day": null,
+        "condition": null
+      },
+      {
+        "festival": 3,
+        "kind": "random",
+        "chance": 0.5,
+        "at": null,
+        "day": null,
+        "condition": null
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "label": "Rush-order more stock (most of it sells)",
+        "effect": null,
+        "costShareR": -0.001,
+        "customers": 0,
+        "bands": 0,
+        "reputation": 0
+      },
+      {
+        "key": "B",
+        "label": "Raise the price by £5",
+        "effect": null,
+        "costShareR": -0.004,
+        "customers": -2,
+        "bands": 0,
+        "reputation": 0
+      },
+      {
+        "key": "C",
+        "label": "Let it sell out",
+        "effect": null,
+        "costShareR": 0,
+        "customers": -1,
+        "bands": 0,
+        "reputation": 0
+      }
+    ]
+  },
+  {
+    "id": "light-rain",
+    "name": "Light rain",
+    "phase": "day",
+    "from": null,
+    "when": "Random, afternoon (50%)",
+    "schedule": [
+      {
+        "festival": 2,
+        "kind": "random",
+        "chance": 0.5,
+        "at": "15:00",
+        "day": null,
+        "condition": null
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "label": "Hand out free ponchos (about £340)",
+        "effect": null,
+        "costShareR": 0.0075,
+        "customers": -1,
+        "bands": 0,
+        "reputation": 0
+      },
+      {
+        "key": "B",
+        "label": "Open a covered area (about £450)",
+        "effect": null,
+        "costShareR": 0.01,
+        "customers": 0,
+        "bands": 0,
+        "reputation": 0
+      },
+      {
+        "key": "C",
+        "label": "Do nothing (bar sales dip, about £225)",
+        "effect": null,
+        "costShareR": 0.005,
+        "customers": -6,
+        "bands": 0,
+        "reputation": 0
+      }
+    ]
+  },
+  {
+    "id": "headliner-delayed",
+    "name": "Headliner delayed",
+    "phase": "day",
+    "from": null,
+    "when": "Random (30%)",
+    "schedule": [
+      {
+        "festival": 2,
+        "kind": "random",
+        "chance": 0.3,
+        "at": null,
+        "day": null,
+        "condition": null
+      },
+      {
+        "festival": 3,
+        "kind": "random",
+        "chance": 0.3,
+        "at": null,
+        "day": null,
+        "condition": null
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "label": "Extend the opener (overtime, about £340 at festival 2, £900 at festival 3)",
+        "effect": null,
+        "costShareR": 0.0075,
+        "customers": 0,
+        "bands": 0,
+        "reputation": 0
+      },
+      {
+        "key": "B",
+        "label": "Wait it out",
+        "effect": null,
+        "costShareR": 0,
+        "customers": -3,
+        "bands": 0,
+        "reputation": 0
+      },
+      {
+        "key": "C",
+        "label": "Put the support act on early",
+        "effect": null,
+        "costShareR": 0,
+        "customers": -1,
+        "bands": -3,
+        "reputation": 0
+      }
+    ]
+  },
+  {
+    "id": "headliner-storms-off",
+    "name": "Headliner storms off",
+    "phase": "day",
+    "from": null,
+    "when": "Scripted, during the headline set",
+    "schedule": [
+      {
+        "festival": 3,
+        "kind": "scripted",
+        "chance": null,
+        "at": "21:30",
+        "day": null,
+        "condition": null
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "label": "Talk them back on (a bonus of about 15% of their fee, about £2,250)",
+        "effect": null,
+        "costShareR": 0.01875,
+        "customers": 0,
+        "bands": -3,
+        "reputation": 0
+      },
+      {
+        "key": "B",
+        "label": "Bring the support act back on",
+        "effect": null,
+        "costShareR": 0,
+        "customers": -5,
+        "bands": 0,
+        "reputation": 0
+      },
+      {
+        "key": "C",
+        "label": "Do nothing",
+        "effect": null,
+        "costShareR": 0,
+        "customers": -10,
+        "bands": 0,
+        "reputation": -5
+      }
+    ]
+  },
+  {
+    "id": "band-pulls-out",
+    "name": "Band pulls out",
+    "phase": "day",
+    "from": null,
+    "when": "Random (30%)",
+    "schedule": [
+      {
+        "festival": 3,
+        "kind": "random",
+        "chance": 0.3,
+        "at": null,
+        "day": null,
+        "condition": null
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "label": "Book a replacement at a premium (about £3,600)",
+        "effect": null,
+        "costShareR": 0.03,
+        "customers": 0,
+        "bands": 0,
+        "reputation": 0
+      },
+      {
+        "key": "B",
+        "label": "Move an act already on the bill up a slot",
+        "effect": null,
+        "costShareR": 0,
+        "customers": -3,
+        "bands": 0,
+        "reputation": 0
+      },
+      {
+        "key": "C",
+        "label": "Shorten the bill",
+        "effect": null,
+        "costShareR": 0,
+        "customers": -6,
+        "bands": 0,
+        "reputation": -2
+      }
+    ]
+  },
+  {
+    "id": "sound-bleed",
+    "name": "Sound bleed",
+    "phase": "day",
+    "from": null,
+    "when": "Two loud acts overlap (50%)",
+    "schedule": [
+      {
+        "festival": 3,
+        "kind": "random",
+        "chance": 0.5,
+        "at": null,
+        "day": null,
+        "condition": "loud-acts-overlap"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "label": "Reschedule one act",
+        "effect": null,
+        "costShareR": 0,
+        "customers": 0,
+        "bands": -3,
+        "reputation": 0
+      },
+      {
+        "key": "B",
+        "label": "Turn both stages down",
+        "effect": null,
+        "costShareR": 0,
+        "customers": -2,
+        "bands": -2,
+        "reputation": 0
+      },
+      {
+        "key": "C",
+        "label": "Accept it",
+        "effect": null,
+        "costShareR": 0,
+        "customers": -4,
+        "bands": 0,
+        "reputation": 0
+      }
+    ]
+  },
+  {
+    "id": "toilets-out-of-order",
+    "name": "Toilets out of order",
+    "phase": "day",
+    "from": null,
+    "when": "Random (40%)",
+    "schedule": [
+      {
+        "festival": 3,
+        "kind": "random",
+        "chance": 0.4,
+        "at": null,
+        "day": null,
+        "condition": null
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "label": "Call an emergency repair (about £1,800)",
+        "effect": null,
+        "costShareR": 0.015,
+        "customers": 0,
+        "bands": 0,
+        "reputation": 0
+      },
+      {
+        "key": "B",
+        "label": "Add a temporary toilet block (about £600)",
+        "effect": null,
+        "costShareR": 0.005,
+        "customers": -1,
+        "bands": 0,
+        "reputation": 0
+      },
+      {
+        "key": "C",
+        "label": "Do nothing",
+        "effect": null,
+        "costShareR": 0,
+        "customers": -6,
+        "bands": 0,
+        "reputation": 0
+      }
+    ]
+  },
+  {
+    "id": "sound-limiter",
+    "name": "Sound limiter",
+    "phase": "prep",
+    "from": "Village Green Trust (the venue)",
+    "when": "Festival 1: day 20. Festivals 2 and 3: day 30",
+    "schedule": [
+      {
+        "festival": 1,
+        "kind": "scripted",
+        "chance": null,
+        "at": null,
+        "day": 20,
+        "condition": null
+      },
+      {
+        "festival": 2,
+        "kind": "scripted",
+        "chance": null,
+        "at": null,
+        "day": 30,
+        "condition": null
+      },
+      {
+        "festival": 3,
+        "kind": "scripted",
+        "chance": null,
+        "at": null,
+        "day": 30,
+        "condition": null
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "label": "Install a sound limiter (about £75)",
+        "effect": "The noise complaint cannot happen (a prevented problem)",
+        "costShareR": 0.006,
+        "customers": 0,
+        "bands": 0,
+        "reputation": 0,
+        "prevents": [
+          "noise-complaint"
+        ]
+      },
+      {
+        "key": "B",
+        "label": "Agree to finish at 10:30pm instead of 11pm",
+        "effect": "Bands -3 (shorter headline set); the complaint cannot happen",
+        "costShareR": 0,
+        "customers": 0,
+        "bands": -3,
+        "reputation": 0,
+        "prevents": [
+          "noise-complaint"
+        ]
+      },
+      {
+        "key": "C",
+        "label": "Decline",
+        "effect": "The noise complaint stays possible on the day",
+        "costShareR": 0,
+        "customers": 0,
+        "bands": 0,
+        "reputation": 0
+      }
+    ]
+  },
+  {
+    "id": "slow-sales",
+    "name": "Slow sales",
+    "phase": "prep",
+    "from": "Box office",
+    "when": "Check on festival 1 day 14 (festivals 2 and 3: day 30); only if forecast attendance is below 80% of capacity",
+    "schedule": [
+      {
+        "festival": 1,
+        "kind": "scripted",
+        "chance": null,
+        "at": null,
+        "day": 14,
+        "condition": "forecast-below-threshold"
+      },
+      {
+        "festival": 2,
+        "kind": "scripted",
+        "chance": null,
+        "at": null,
+        "day": 30,
+        "condition": "forecast-below-threshold"
+      },
+      {
+        "festival": 3,
+        "kind": "scripted",
+        "chance": null,
+        "at": null,
+        "day": 30,
+        "condition": "forecast-below-threshold"
+      }
+    ],
+    "options": [
+      {
+        "key": "A",
+        "label": "Cut the ticket price by 8% of the fair price (about £2) from tomorrow",
+        "effect": "Lower price, higher demand, as the formulas say",
+        "costShareR": 0,
+        "customers": 0,
+        "bands": 0,
+        "reputation": 0,
+        "priceCutShareOfFair": 0.08
+      },
+      {
+        "key": "B",
+        "label": "Put up posters around the area (about £150)",
+        "effect": "Forecast attendance +3 points (capped at 100%)",
+        "costShareR": 0.012,
+        "customers": 0,
+        "bands": 0,
+        "reputation": 0,
+        "attendanceBonus": 0.03
+      },
+      {
+        "key": "C",
+        "label": "Hold your nerve",
+        "effect": "No change",
+        "costShareR": 0,
+        "customers": 0,
+        "bands": 0,
+        "reputation": 0
+      }
+    ]
+  }
+]
